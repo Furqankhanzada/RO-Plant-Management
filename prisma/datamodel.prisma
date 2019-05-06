@@ -1,0 +1,100 @@
+type User {
+  id: ID! @unique
+  name: String
+  mobile: String! @unique
+  password: String!
+  roles: [Role]!
+  address: Address
+  discounts: [Discount]
+  transactions: [Transaction]
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Address {
+  id: ID! @unique
+  town: String
+  area: String
+  block: String
+  house: String
+  location: Location
+}
+
+type Location {
+  id: ID! @unique
+  latitude: Float!
+  longitude: Float!
+}
+
+type Role {
+  id: ID! @unique
+  name: String
+}
+
+type Product {
+  id: ID! @unique
+  name: String!
+  price: Float!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Discount {
+  id: ID! @unique
+  product: Product!
+  discount: Int! @default(value: 0)
+  user: User!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Transaction {
+  id: ID! @unique
+  type: TransactionType! @default(value: SELL)
+  status: TransactionStatus! @default(value: PENDING)
+  items: [Item!]!
+  payment: Payment!
+  user: User
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Item {
+  id: ID! @unique
+  product: Product!
+  quantity: Int!
+  discount: Int! @default(value: 0)
+  total: Float!
+}
+
+enum TransactionType {
+  SELL
+  PURCHASE
+}
+
+enum TransactionStatus {
+  PENDING
+  PROCESSING,
+  COMPLETED
+}
+
+type Payment {
+  id: ID! @unique
+  paid: Float!
+  balance: Float!
+  method: PaymentMethod! @default(value: CASH)
+  status: PaymentStatus @default(value: UNPAID)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CHEQUE
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}

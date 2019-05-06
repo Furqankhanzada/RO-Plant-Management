@@ -1,0 +1,119 @@
+scalar DateTime
+
+type Query {
+  me: User
+}
+
+type Mutation {
+  signup(mobile: String!, password: String!, name: String!): AuthPayload!
+  login(mobile: String!, password: String!): AuthPayload!
+}
+
+type Subscription {
+  userSubscription: User
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  name: String
+  mobile: String!
+  roles: [Role]!
+  address: Address
+  discounts: [Discount]
+  transactions: [Transaction]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Address {
+  id: ID!
+  town: String
+  area: String
+  block: String
+  house: String
+  location: Location
+}
+
+type Location {
+  id: ID!
+  latitude: Float!
+  longitude: Float!
+}
+
+type Role {
+  id: ID!
+  name: String
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Discount {
+  id: ID!
+  product: Product!
+  discount: Int!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Transaction {
+  id: ID!
+  type: TransactionType!
+  status: TransactionStatus!
+  items: [Item!]!
+  payment: Payment!
+  user: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Item {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  discount: Int!
+  total: Float!
+}
+
+enum TransactionType {
+  SELL
+  PURCHASE
+}
+
+enum TransactionStatus {
+  PENDING
+  PROCESSING,
+  COMPLETED
+}
+
+type Payment {
+  id: ID!
+  paid: Float!
+  balance: Float!
+  method: PaymentMethod!
+  status: PaymentStatus
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CHEQUE
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
