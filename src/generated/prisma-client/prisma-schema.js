@@ -217,10 +217,6 @@ type AggregateProduct {
   count: Int!
 }
 
-type AggregateRole {
-  count: Int!
-}
-
 type AggregateTransaction {
   count: Int!
 }
@@ -830,12 +826,6 @@ type Mutation {
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
-  createRole(data: RoleCreateInput!): Role!
-  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
-  updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
-  upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
-  deleteRole(where: RoleWhereUniqueInput!): Role
-  deleteManyRoles(where: RoleWhereInput): BatchPayload!
   createTransaction(data: TransactionCreateInput!): Transaction!
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
@@ -1229,9 +1219,6 @@ type Query {
   product(where: ProductWhereUniqueInput!): Product
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
-  role(where: RoleWhereUniqueInput!): Role
-  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
-  rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
   transaction(where: TransactionWhereUniqueInput!): Transaction
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
   transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
@@ -1241,175 +1228,9 @@ type Query {
   node(id: ID!): Node
 }
 
-type Role {
-  id: ID!
-  name: String
-}
-
-type RoleConnection {
-  pageInfo: PageInfo!
-  edges: [RoleEdge]!
-  aggregate: AggregateRole!
-}
-
-input RoleCreateInput {
-  name: String
-}
-
-input RoleCreateManyInput {
-  create: [RoleCreateInput!]
-  connect: [RoleWhereUniqueInput!]
-}
-
-type RoleEdge {
-  node: Role!
-  cursor: String!
-}
-
-enum RoleOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-}
-
-type RolePreviousValues {
-  id: ID!
-  name: String
-}
-
-input RoleScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [RoleScalarWhereInput!]
-  OR: [RoleScalarWhereInput!]
-  NOT: [RoleScalarWhereInput!]
-}
-
-type RoleSubscriptionPayload {
-  mutation: MutationType!
-  node: Role
-  updatedFields: [String!]
-  previousValues: RolePreviousValues
-}
-
-input RoleSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: RoleWhereInput
-  AND: [RoleSubscriptionWhereInput!]
-  OR: [RoleSubscriptionWhereInput!]
-  NOT: [RoleSubscriptionWhereInput!]
-}
-
-input RoleUpdateDataInput {
-  name: String
-}
-
-input RoleUpdateInput {
-  name: String
-}
-
-input RoleUpdateManyDataInput {
-  name: String
-}
-
-input RoleUpdateManyInput {
-  create: [RoleCreateInput!]
-  update: [RoleUpdateWithWhereUniqueNestedInput!]
-  upsert: [RoleUpsertWithWhereUniqueNestedInput!]
-  delete: [RoleWhereUniqueInput!]
-  connect: [RoleWhereUniqueInput!]
-  set: [RoleWhereUniqueInput!]
-  disconnect: [RoleWhereUniqueInput!]
-  deleteMany: [RoleScalarWhereInput!]
-  updateMany: [RoleUpdateManyWithWhereNestedInput!]
-}
-
-input RoleUpdateManyMutationInput {
-  name: String
-}
-
-input RoleUpdateManyWithWhereNestedInput {
-  where: RoleScalarWhereInput!
-  data: RoleUpdateManyDataInput!
-}
-
-input RoleUpdateWithWhereUniqueNestedInput {
-  where: RoleWhereUniqueInput!
-  data: RoleUpdateDataInput!
-}
-
-input RoleUpsertWithWhereUniqueNestedInput {
-  where: RoleWhereUniqueInput!
-  update: RoleUpdateDataInput!
-  create: RoleCreateInput!
-}
-
-input RoleWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  AND: [RoleWhereInput!]
-  OR: [RoleWhereInput!]
-  NOT: [RoleWhereInput!]
-}
-
-input RoleWhereUniqueInput {
-  id: ID
+enum Role {
+  ADMIN
+  CUSTOMER
 }
 
 type Subscription {
@@ -1419,7 +1240,6 @@ type Subscription {
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
-  role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
   transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -1671,7 +1491,7 @@ type User {
   name: String
   mobile: String!
   password: String!
-  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role!]
+  role: Role!
   address: Address
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount!]
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -1689,7 +1509,7 @@ input UserCreateInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
   transactions: TransactionCreateManyWithoutUserInput
@@ -1709,7 +1529,7 @@ input UserCreateWithoutDiscountsInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   transactions: TransactionCreateManyWithoutUserInput
 }
@@ -1718,7 +1538,7 @@ input UserCreateWithoutTransactionsInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
 }
@@ -1737,6 +1557,8 @@ enum UserOrderByInput {
   mobile_DESC
   password_ASC
   password_DESC
+  role_ASC
+  role_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1748,6 +1570,7 @@ type UserPreviousValues {
   name: String
   mobile: String!
   password: String!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1774,7 +1597,7 @@ input UserUpdateInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
   transactions: TransactionUpdateManyWithoutUserInput
@@ -1784,6 +1607,7 @@ input UserUpdateManyMutationInput {
   name: String
   mobile: String
   password: String
+  role: Role
 }
 
 input UserUpdateOneRequiredWithoutDiscountsInput {
@@ -1806,7 +1630,7 @@ input UserUpdateWithoutDiscountsDataInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   transactions: TransactionUpdateManyWithoutUserInput
 }
@@ -1815,7 +1639,7 @@ input UserUpdateWithoutTransactionsDataInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
 }
@@ -1887,9 +1711,10 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
-  roles_every: RoleWhereInput
-  roles_some: RoleWhereInput
-  roles_none: RoleWhereInput
+  role: Role
+  role_not: Role
+  role_in: [Role!]
+  role_not_in: [Role!]
   address: AddressWhereInput
   discounts_every: DiscountWhereInput
   discounts_some: DiscountWhereInput

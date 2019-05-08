@@ -1,15 +1,25 @@
 const { rule, and, shield } = require('graphql-shield')
 
 const rules = {
-    isAuthenticatedUser: rule()((parent, args, { user : { id } }) => {
+    isAuthenticated: rule()((parent, args, { user : { id } }) => {
         return Boolean(id)
+    }),
+    isAdmin : rule()(async (parent, args, { user : { role } }) => {
+        return role === 'ADMIN'
+    }),
+    isCustomer : rule()(async (parent, args, { user : { role } }) => {
+        return role === 'CUSTOMER'
     })
 };
 
 const permissions = shield({
     Query: {
-        me: rules.isAuthenticatedUser
-    }
+        me: rules.isAuthenticated,
+        customers: and(rules.isAuthenticated, rules.isAdmin)
+    },
+    Mutation: {
+
+    },
 });
 
 module.exports = {

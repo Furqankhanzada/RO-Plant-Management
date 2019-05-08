@@ -3,12 +3,17 @@ type User {
   name: String
   mobile: String! @unique
   password: String!
-  roles: [Role]!
+  role: Role! @default(value: CUSTOMER)
   address: Address
   discounts: [Discount]
   transactions: [Transaction]
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
 }
 
 type Address {
@@ -24,11 +29,6 @@ type Location {
   id: ID! @unique
   latitude: Float!
   longitude: Float!
-}
-
-type Role {
-  id: ID! @unique
-  name: String
 }
 
 type Product {

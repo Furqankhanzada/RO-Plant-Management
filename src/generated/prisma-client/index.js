@@ -9,15 +9,15 @@ var models = [
     embedded: false
   },
   {
+    name: "Role",
+    embedded: false
+  },
+  {
     name: "Address",
     embedded: false
   },
   {
     name: "Location",
-    embedded: false
-  },
-  {
-    name: "Role",
     embedded: false
   },
   {
@@ -60,7 +60,7 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://ro-plant-d678feb064.herokuapp.com/ro-plant-backend/dev`,
+  endpoint: `${process.env["PRISMA_ENDPOINT"]}`,
   secret: `${process.env["PRISMA_SECRET"]}`
 });
 exports.prisma = new exports.Prisma();

@@ -3,6 +3,7 @@ const { auth } = require('./Mutation/auth');
 const { Subscription } = require('./Subscription');
 const { User } = require('./User');
 const { Transaction } = require('./Transaction');
+const { Item } = require('./Item');
 
 module.exports = {
   Query,
@@ -11,5 +12,6 @@ module.exports = {
   },
   Subscription,
   User,
-  Transaction
+  Transaction,
+  Item
 };

@@ -1,5 +1,5 @@
 # source: https://ro-plant-d678feb064.herokuapp.com/ro-plant-backend/dev
-# timestamp: Mon May 06 2019 00:57:22 GMT+0500 (PKT)
+# timestamp: Wed May 08 2019 16:51:10 GMT+0500 (PKT)
 
 type Address implements Node {
   id: ID!
@@ -378,10 +378,6 @@ type AggregatePayment {
 }
 
 type AggregateProduct {
-  count: Int!
-}
-
-type AggregateRole {
   count: Int!
 }
 
@@ -1407,7 +1403,6 @@ type Mutation {
   createPayment(data: PaymentCreateInput!): Payment!
   createLocation(data: LocationCreateInput!): Location!
   createItem(data: ItemCreateInput!): Item!
-  createRole(data: RoleCreateInput!): Role!
   createProduct(data: ProductCreateInput!): Product!
   createAddress(data: AddressCreateInput!): Address!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -1416,7 +1411,6 @@ type Mutation {
   updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
-  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
   deleteUser(where: UserWhereUniqueInput!): User
@@ -1425,7 +1419,6 @@ type Mutation {
   deletePayment(where: PaymentWhereUniqueInput!): Payment
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteItem(where: ItemWhereUniqueInput!): Item
-  deleteRole(where: RoleWhereUniqueInput!): Role
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteAddress(where: AddressWhereUniqueInput!): Address
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
@@ -1434,7 +1427,6 @@ type Mutation {
   upsertPayment(where: PaymentWhereUniqueInput!, create: PaymentCreateInput!, update: PaymentUpdateInput!): Payment!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
-  upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
   upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -1443,7 +1435,6 @@ type Mutation {
   updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
-  updateManyRoles(data: RoleUpdateManyMutationInput!, where: RoleWhereInput): BatchPayload!
   updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
   updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -1452,7 +1443,6 @@ type Mutation {
   deleteManyPayments(where: PaymentWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
-  deleteManyRoles(where: RoleWhereInput): BatchPayload!
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
   deleteManyAddresses(where: AddressWhereInput): BatchPayload!
 }
@@ -2086,7 +2076,6 @@ type Query {
   payments(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Payment]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
-  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   user(where: UserWhereUniqueInput!): User
@@ -2095,7 +2084,6 @@ type Query {
   payment(where: PaymentWhereUniqueInput!): Payment
   location(where: LocationWhereUniqueInput!): Location
   item(where: ItemWhereUniqueInput!): Item
-  role(where: RoleWhereUniqueInput!): Role
   product(where: ProductWhereUniqueInput!): Product
   address(where: AddressWhereUniqueInput!): Address
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -2104,7 +2092,6 @@ type Query {
   paymentsConnection(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaymentConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
-  rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
 
@@ -2115,319 +2102,9 @@ type Query {
   ): Node
 }
 
-type Role implements Node {
-  id: ID!
-  name: String
-}
-
-"""A connection to a list of items."""
-type RoleConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [RoleEdge]!
-  aggregate: AggregateRole!
-}
-
-input RoleCreateInput {
-  name: String
-}
-
-input RoleCreateManyInput {
-  create: [RoleCreateInput!]
-  connect: [RoleWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type RoleEdge {
-  """The item at the end of the edge."""
-  node: Role!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum RoleOrderByInput {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type RolePreviousValues {
-  id: ID!
-  name: String
-}
-
-input RoleScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RoleScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [RoleScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [RoleScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-}
-
-type RoleSubscriptionPayload {
-  mutation: MutationType!
-  node: Role
-  updatedFields: [String!]
-  previousValues: RolePreviousValues
-}
-
-input RoleSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RoleSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [RoleSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [RoleSubscriptionWhereInput!]
-
-  """The subscription event gets dispatched when it's listed in mutation_in"""
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: RoleWhereInput
-}
-
-input RoleUpdateDataInput {
-  name: String
-}
-
-input RoleUpdateInput {
-  name: String
-}
-
-input RoleUpdateManyDataInput {
-  name: String
-}
-
-input RoleUpdateManyInput {
-  create: [RoleCreateInput!]
-  connect: [RoleWhereUniqueInput!]
-  disconnect: [RoleWhereUniqueInput!]
-  delete: [RoleWhereUniqueInput!]
-  update: [RoleUpdateWithWhereUniqueNestedInput!]
-  updateMany: [RoleUpdateManyWithWhereNestedInput!]
-  deleteMany: [RoleScalarWhereInput!]
-  upsert: [RoleUpsertWithWhereUniqueNestedInput!]
-}
-
-input RoleUpdateManyMutationInput {
-  name: String
-}
-
-input RoleUpdateManyWithWhereNestedInput {
-  where: RoleScalarWhereInput!
-  data: RoleUpdateManyDataInput!
-}
-
-input RoleUpdateWithWhereUniqueNestedInput {
-  where: RoleWhereUniqueInput!
-  data: RoleUpdateDataInput!
-}
-
-input RoleUpsertWithWhereUniqueNestedInput {
-  where: RoleWhereUniqueInput!
-  update: RoleUpdateDataInput!
-  create: RoleCreateInput!
-}
-
-input RoleWhereInput {
-  """Logical AND on all given filters."""
-  AND: [RoleWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [RoleWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [RoleWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-}
-
-input RoleWhereUniqueInput {
-  id: ID
+enum Role {
+  ADMIN
+  CUSTOMER
 }
 
 type Subscription {
@@ -2437,7 +2114,6 @@ type Subscription {
   payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
-  role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
 }
@@ -2857,7 +2533,7 @@ type User implements Node {
   name: String
   mobile: String!
   password: String!
-  roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role!]
+  role: Role!
   address: Address
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount!]
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
@@ -2879,7 +2555,7 @@ input UserCreateInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
   transactions: TransactionCreateManyWithoutUserInput
@@ -2899,7 +2575,7 @@ input UserCreateWithoutDiscountsInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   transactions: TransactionCreateManyWithoutUserInput
 }
@@ -2908,7 +2584,7 @@ input UserCreateWithoutTransactionsInput {
   name: String
   mobile: String!
   password: String!
-  roles: RoleCreateManyInput
+  role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
 }
@@ -2931,6 +2607,8 @@ enum UserOrderByInput {
   mobile_DESC
   password_ASC
   password_DESC
+  role_ASC
+  role_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2942,6 +2620,7 @@ type UserPreviousValues {
   name: String
   mobile: String!
   password: String!
+  role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2987,7 +2666,7 @@ input UserUpdateInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
   transactions: TransactionUpdateManyWithoutUserInput
@@ -2997,6 +2676,7 @@ input UserUpdateManyMutationInput {
   name: String
   mobile: String
   password: String
+  role: Role
 }
 
 input UserUpdateOneRequiredWithoutDiscountsInput {
@@ -3019,7 +2699,7 @@ input UserUpdateWithoutDiscountsDataInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   transactions: TransactionUpdateManyWithoutUserInput
 }
@@ -3028,7 +2708,7 @@ input UserUpdateWithoutTransactionsDataInput {
   name: String
   mobile: String
   password: String
-  roles: RoleUpdateManyInput
+  role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
 }
@@ -3212,6 +2892,16 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  role: Role
+
+  """All values that are not equal to given value."""
+  role_not: Role
+
+  """All values that are contained in given list."""
+  role_in: [Role!]
+
+  """All values that are not contained in given list."""
+  role_not_in: [Role!]
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -3256,9 +2946,6 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
-  roles_every: RoleWhereInput
-  roles_some: RoleWhereInput
-  roles_none: RoleWhereInput
   address: AddressWhereInput
   discounts_every: DiscountWhereInput
   discounts_some: DiscountWhereInput

@@ -7,8 +7,7 @@ function getUserId(context) {
     const { userId } = jwt.verify(token, process.env.APP_SECRET);
     return userId
   }
-
-  throw new AuthError()
+  return null
 }
 
 async function getUser(context, prisma) {
@@ -18,19 +17,14 @@ async function getUser(context, prisma) {
         query  {
           user(where: { id: "${id}" }) {
             id
-            name
+            name,
+            role
           }
         }`;
       const { user } = await prisma.$graphql(query);
       return user;
   } catch (e) {
 
-  }
-}
-
-class AuthError extends Error {
-  constructor() {
-    super('Not authorized')
   }
 }
 

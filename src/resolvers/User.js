@@ -1,7 +1,4 @@
 const User = {
-    roles: ({ id }, args, context) => {
-        return context.prisma.user({ id }).roles()
-    },
     address: ({ id }, args, context) => {
         return context.prisma.user({ id }).address()
     },

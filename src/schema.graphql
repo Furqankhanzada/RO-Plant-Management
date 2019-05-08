@@ -2,6 +2,7 @@ scalar DateTime
 
 type Query {
   me: User
+  customers: [User]
 }
 
 type Mutation {
@@ -22,12 +23,17 @@ type User {
   id: ID!
   name: String
   mobile: String!
-  roles: [Role]!
+  role: Role!
   address: Address
   discounts: [Discount]
   transactions: [Transaction]
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
 }
 
 type Address {
@@ -43,11 +49,6 @@ type Location {
   id: ID!
   latitude: Float!
   longitude: Float!
-}
-
-type Role {
-  id: ID!
-  name: String
 }
 
 type Product {

@@ -16,11 +16,7 @@ mutation {
         mobile: "03122052950"
         name: "Furqan"
         password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m", # "secret42"
-        roles: {
-            create: {
-                name: "admin"
-            }
-        }
+        role: ADMIN
         address: {
             create: {
                 town: "Manghopir",
@@ -101,4 +97,173 @@ mutation {
     }) {
         id
     }
+    user2: createUser(data: {
+        mobile: "03462799866"
+        name: "Farhan Khanzada"
+        password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m", # "secret42"
+        address: {
+            create: {
+                town: "Manghopir",
+                area: "Sultanabbad",
+                block: "Sector 1",
+                house: "Fl 1 R3",
+                location: {
+                    create: {
+                        latitude: 0.345345,
+                        longitude: 0.34534
+                    }
+                }
+            }
+        }
+        discounts: {
+            create: [
+                {
+                    product: {
+                        create: {
+                            name: "20 Liter"
+                            price: 250
+                        }
+                    }
+                    discount: 10
+                }
+            ]
+        }
+        transactions: {
+            create: [
+                {
+                    items: {
+                        create: [
+                            {
+                                product: {
+                                    create: {
+                                        name: "40 Liter"
+                                        price: 300
+                                    }
+                                }
+                                quantity: 6
+                                discount: 50
+                                total: 900
+                            }
+                        ]
+                    }
+                    payment: {
+                        create: {
+                            paid: 600
+                            balance: 20
+                        }
+                    }
+                },
+                {
+                    items: {
+                        create: [
+                            {
+                                product: {
+                                    create: {
+                                        name: "30 Liter"
+                                        price: 300
+                                    }
+                                }
+                                quantity: 6
+                                discount: 50
+                                total: 900
+                            }
+                        ]
+                    }
+                    payment: {
+                        create: {
+                            paid: 600
+                            balance: 20
+                        }
+                    }
+                }
+            ]
+        }
+    }) {
+        id
+    }
+    user3: createUser(data: {
+        mobile: "03462799867"
+        name: "Ijlal Khanzada"
+        password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m", # "secret42"
+        address: {
+            create: {
+                town: "Manghopir",
+                area: "Sultanabbad",
+                block: "Sector 1",
+                house: "Fl 1 R3",
+                location: {
+                    create: {
+                        latitude: 0.345345,
+                        longitude: 0.34534
+                    }
+                }
+            }
+        }
+        discounts: {
+            create: [
+                {
+                    product: {
+                        create: {
+                            name: "20 Liter"
+                            price: 250
+                        }
+                    }
+                    discount: 10
+                }
+            ]
+        }
+        transactions: {
+            create: [
+                {
+                    items: {
+                        create: [
+                            {
+                                product: {
+                                    create: {
+                                        name: "40 Liter"
+                                        price: 300
+                                    }
+                                }
+                                quantity: 6
+                                discount: 50
+                                total: 900
+                            }
+                        ]
+                    }
+                    payment: {
+                        create: {
+                            paid: 600
+                            balance: 20
+                        }
+                    }
+                },
+                {
+                    items: {
+                        create: [
+                            {
+                                product: {
+                                    create: {
+                                        name: "30 Liter"
+                                        price: 300
+                                    }
+                                }
+                                quantity: 6
+                                discount: 50
+                                total: 900
+                            }
+                        ]
+                    }
+                    payment: {
+                        create: {
+                            paid: 600
+                            balance: 20
+                        }
+                    }
+                }
+            ]
+        }
+    }) {
+        id
+    }
+
 }
