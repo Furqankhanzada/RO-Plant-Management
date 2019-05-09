@@ -9,6 +9,10 @@ var models = [
     embedded: false
   },
   {
+    name: "UserType",
+    embedded: false
+  },
+  {
     name: "Role",
     embedded: false
   },
@@ -30,6 +34,14 @@ var models = [
   },
   {
     name: "Transaction",
+    embedded: false
+  },
+  {
+    name: "Bottle",
+    embedded: false
+  },
+  {
+    name: "BottleTransaction",
     embedded: false
   },
   {

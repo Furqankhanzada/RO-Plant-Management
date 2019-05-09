@@ -4,6 +4,9 @@ const User = {
     },
     transactions: ({ id }, args, context) => {
         return context.prisma.user({ id }).transactions()
+    },
+    bottle: ({ id }, args, context) => {
+        return context.prisma.user({ id }).bottle()
     }
 };
 

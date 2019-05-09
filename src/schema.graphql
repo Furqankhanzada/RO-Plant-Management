@@ -23,17 +23,25 @@ type User {
   id: ID!
   name: String
   mobile: String!
+  type: UserType
   role: Role!
   address: Address
   discounts: [Discount]
   transactions: [Transaction]
+  bottle: Bottle
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+enum UserType {
+  RESIDENTIAL
+  COMMERCIAL
 }
 
 enum Role {
   ADMIN
   CUSTOMER
+  EMPLOYE
 }
 
 type Address {
@@ -54,7 +62,7 @@ type Location {
 type Product {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -75,6 +83,21 @@ type Transaction {
   items: [Item!]!
   payment: Payment!
   user: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+
+type Bottle {
+  id: ID!
+  balance: Int!
+  bottleTransactions: [BottleTransaction]
+}
+
+type BottleTransaction {
+  id: ID!
+  in: Int!
+  out: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

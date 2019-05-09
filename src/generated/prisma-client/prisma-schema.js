@@ -197,6 +197,14 @@ type AggregateAddress {
   count: Int!
 }
 
+type AggregateBottle {
+  count: Int!
+}
+
+type AggregateBottleTransaction {
+  count: Int!
+}
+
 type AggregateDiscount {
   count: Int!
 }
@@ -227,6 +235,350 @@ type AggregateUser {
 
 type BatchPayload {
   count: Long!
+}
+
+type Bottle {
+  id: ID!
+  balance: Int!
+  bottleTransactions(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BottleTransaction!]
+}
+
+type BottleConnection {
+  pageInfo: PageInfo!
+  edges: [BottleEdge]!
+  aggregate: AggregateBottle!
+}
+
+input BottleCreateInput {
+  balance: Int
+  bottleTransactions: BottleTransactionCreateManyInput
+}
+
+input BottleCreateOneInput {
+  create: BottleCreateInput
+  connect: BottleWhereUniqueInput
+}
+
+type BottleEdge {
+  node: Bottle!
+  cursor: String!
+}
+
+enum BottleOrderByInput {
+  id_ASC
+  id_DESC
+  balance_ASC
+  balance_DESC
+}
+
+type BottlePreviousValues {
+  id: ID!
+  balance: Int!
+}
+
+type BottleSubscriptionPayload {
+  mutation: MutationType!
+  node: Bottle
+  updatedFields: [String!]
+  previousValues: BottlePreviousValues
+}
+
+input BottleSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BottleWhereInput
+  AND: [BottleSubscriptionWhereInput!]
+  OR: [BottleSubscriptionWhereInput!]
+  NOT: [BottleSubscriptionWhereInput!]
+}
+
+type BottleTransaction {
+  id: ID!
+  in: Int!
+  out: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type BottleTransactionConnection {
+  pageInfo: PageInfo!
+  edges: [BottleTransactionEdge]!
+  aggregate: AggregateBottleTransaction!
+}
+
+input BottleTransactionCreateInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionCreateManyInput {
+  create: [BottleTransactionCreateInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+}
+
+type BottleTransactionEdge {
+  node: BottleTransaction!
+  cursor: String!
+}
+
+enum BottleTransactionOrderByInput {
+  id_ASC
+  id_DESC
+  in_ASC
+  in_DESC
+  out_ASC
+  out_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type BottleTransactionPreviousValues {
+  id: ID!
+  in: Int!
+  out: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input BottleTransactionScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  in: Int
+  in_not: Int
+  in_in: [Int!]
+  in_not_in: [Int!]
+  in_lt: Int
+  in_lte: Int
+  in_gt: Int
+  in_gte: Int
+  out: Int
+  out_not: Int
+  out_in: [Int!]
+  out_not_in: [Int!]
+  out_lt: Int
+  out_lte: Int
+  out_gt: Int
+  out_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [BottleTransactionScalarWhereInput!]
+  OR: [BottleTransactionScalarWhereInput!]
+  NOT: [BottleTransactionScalarWhereInput!]
+}
+
+type BottleTransactionSubscriptionPayload {
+  mutation: MutationType!
+  node: BottleTransaction
+  updatedFields: [String!]
+  previousValues: BottleTransactionPreviousValues
+}
+
+input BottleTransactionSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: BottleTransactionWhereInput
+  AND: [BottleTransactionSubscriptionWhereInput!]
+  OR: [BottleTransactionSubscriptionWhereInput!]
+  NOT: [BottleTransactionSubscriptionWhereInput!]
+}
+
+input BottleTransactionUpdateDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyInput {
+  create: [BottleTransactionCreateInput!]
+  update: [BottleTransactionUpdateWithWhereUniqueNestedInput!]
+  upsert: [BottleTransactionUpsertWithWhereUniqueNestedInput!]
+  delete: [BottleTransactionWhereUniqueInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+  set: [BottleTransactionWhereUniqueInput!]
+  disconnect: [BottleTransactionWhereUniqueInput!]
+  deleteMany: [BottleTransactionScalarWhereInput!]
+  updateMany: [BottleTransactionUpdateManyWithWhereNestedInput!]
+}
+
+input BottleTransactionUpdateManyMutationInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyWithWhereNestedInput {
+  where: BottleTransactionScalarWhereInput!
+  data: BottleTransactionUpdateManyDataInput!
+}
+
+input BottleTransactionUpdateWithWhereUniqueNestedInput {
+  where: BottleTransactionWhereUniqueInput!
+  data: BottleTransactionUpdateDataInput!
+}
+
+input BottleTransactionUpsertWithWhereUniqueNestedInput {
+  where: BottleTransactionWhereUniqueInput!
+  update: BottleTransactionUpdateDataInput!
+  create: BottleTransactionCreateInput!
+}
+
+input BottleTransactionWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  in: Int
+  in_not: Int
+  in_in: [Int!]
+  in_not_in: [Int!]
+  in_lt: Int
+  in_lte: Int
+  in_gt: Int
+  in_gte: Int
+  out: Int
+  out_not: Int
+  out_in: [Int!]
+  out_not_in: [Int!]
+  out_lt: Int
+  out_lte: Int
+  out_gt: Int
+  out_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [BottleTransactionWhereInput!]
+  OR: [BottleTransactionWhereInput!]
+  NOT: [BottleTransactionWhereInput!]
+}
+
+input BottleTransactionWhereUniqueInput {
+  id: ID
+}
+
+input BottleUpdateDataInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyInput
+}
+
+input BottleUpdateInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyInput
+}
+
+input BottleUpdateManyMutationInput {
+  balance: Int
+}
+
+input BottleUpdateOneInput {
+  create: BottleCreateInput
+  update: BottleUpdateDataInput
+  upsert: BottleUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: BottleWhereUniqueInput
+}
+
+input BottleUpsertNestedInput {
+  update: BottleUpdateDataInput!
+  create: BottleCreateInput!
+}
+
+input BottleWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  balance: Int
+  balance_not: Int
+  balance_in: [Int!]
+  balance_not_in: [Int!]
+  balance_lt: Int
+  balance_lte: Int
+  balance_gt: Int
+  balance_gte: Int
+  bottleTransactions_every: BottleTransactionWhereInput
+  bottleTransactions_some: BottleTransactionWhereInput
+  bottleTransactions_none: BottleTransactionWhereInput
+  AND: [BottleWhereInput!]
+  OR: [BottleWhereInput!]
+  NOT: [BottleWhereInput!]
+}
+
+input BottleWhereUniqueInput {
+  id: ID
 }
 
 scalar DateTime
@@ -796,6 +1148,18 @@ type Mutation {
   upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
   deleteAddress(where: AddressWhereUniqueInput!): Address
   deleteManyAddresses(where: AddressWhereInput): BatchPayload!
+  createBottle(data: BottleCreateInput!): Bottle!
+  updateBottle(data: BottleUpdateInput!, where: BottleWhereUniqueInput!): Bottle
+  updateManyBottles(data: BottleUpdateManyMutationInput!, where: BottleWhereInput): BatchPayload!
+  upsertBottle(where: BottleWhereUniqueInput!, create: BottleCreateInput!, update: BottleUpdateInput!): Bottle!
+  deleteBottle(where: BottleWhereUniqueInput!): Bottle
+  deleteManyBottles(where: BottleWhereInput): BatchPayload!
+  createBottleTransaction(data: BottleTransactionCreateInput!): BottleTransaction!
+  updateBottleTransaction(data: BottleTransactionUpdateInput!, where: BottleTransactionWhereUniqueInput!): BottleTransaction
+  updateManyBottleTransactions(data: BottleTransactionUpdateManyMutationInput!, where: BottleTransactionWhereInput): BatchPayload!
+  upsertBottleTransaction(where: BottleTransactionWhereUniqueInput!, create: BottleTransactionCreateInput!, update: BottleTransactionUpdateInput!): BottleTransaction!
+  deleteBottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
+  deleteManyBottleTransactions(where: BottleTransactionWhereInput): BatchPayload!
   createDiscount(data: DiscountCreateInput!): Discount!
   updateDiscount(data: DiscountUpdateInput!, where: DiscountWhereUniqueInput!): Discount
   updateManyDiscounts(data: DiscountUpdateManyMutationInput!, where: DiscountWhereInput): BatchPayload!
@@ -1046,7 +1410,7 @@ input PaymentWhereUniqueInput {
 type Product {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1059,7 +1423,7 @@ type ProductConnection {
 
 input ProductCreateInput {
   name: String!
-  price: Float!
+  price: Int!
 }
 
 input ProductCreateOneInput {
@@ -1088,7 +1452,7 @@ enum ProductOrderByInput {
 type ProductPreviousValues {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1113,17 +1477,17 @@ input ProductSubscriptionWhereInput {
 
 input ProductUpdateDataInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateManyMutationInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateOneRequiredInput {
@@ -1167,14 +1531,14 @@ input ProductWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  price: Float
-  price_not: Float
-  price_in: [Float!]
-  price_not_in: [Float!]
-  price_lt: Float
-  price_lte: Float
-  price_gt: Float
-  price_gte: Float
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1204,6 +1568,12 @@ type Query {
   address(where: AddressWhereUniqueInput!): Address
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
+  bottle(where: BottleWhereUniqueInput!): Bottle
+  bottles(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bottle]!
+  bottlesConnection(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleConnection!
+  bottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
+  bottleTransactions(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BottleTransaction]!
+  bottleTransactionsConnection(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleTransactionConnection!
   discount(where: DiscountWhereUniqueInput!): Discount
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount]!
   discountsConnection(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DiscountConnection!
@@ -1231,10 +1601,13 @@ type Query {
 enum Role {
   ADMIN
   CUSTOMER
+  EMPLOYEE
 }
 
 type Subscription {
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
+  bottle(where: BottleSubscriptionWhereInput): BottleSubscriptionPayload
+  bottleTransaction(where: BottleTransactionSubscriptionWhereInput): BottleTransactionSubscriptionPayload
   discount(where: DiscountSubscriptionWhereInput): DiscountSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
@@ -1491,10 +1864,12 @@ type User {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role!
   address: Address
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount!]
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
+  bottle: Bottle
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1509,10 +1884,12 @@ input UserCreateInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
   transactions: TransactionCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 input UserCreateOneWithoutDiscountsInput {
@@ -1529,18 +1906,22 @@ input UserCreateWithoutDiscountsInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   transactions: TransactionCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 input UserCreateWithoutTransactionsInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 type UserEdge {
@@ -1557,6 +1938,8 @@ enum UserOrderByInput {
   mobile_DESC
   password_ASC
   password_DESC
+  type_ASC
+  type_DESC
   role_ASC
   role_DESC
   createdAt_ASC
@@ -1570,6 +1953,7 @@ type UserPreviousValues {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1593,20 +1977,28 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
+enum UserType {
+  RESIDENTIAL
+  COMMERCIAL
+}
+
 input UserUpdateInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
   transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
 }
 
@@ -1630,18 +2022,22 @@ input UserUpdateWithoutDiscountsDataInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpdateWithoutTransactionsDataInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpsertWithoutDiscountsInput {
@@ -1711,6 +2107,10 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  type: UserType
+  type_not: UserType
+  type_in: [UserType!]
+  type_not_in: [UserType!]
   role: Role
   role_not: Role
   role_in: [Role!]
@@ -1722,6 +2122,7 @@ input UserWhereInput {
   transactions_every: TransactionWhereInput
   transactions_some: TransactionWhereInput
   transactions_none: TransactionWhereInput
+  bottle: BottleWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

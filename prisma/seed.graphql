@@ -17,6 +17,19 @@ mutation {
         name: "Furqan"
         password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m", # "secret42"
         role: ADMIN
+        bottle: {
+            create: {
+                balance: 5
+                bottleTransactions: {
+                    create: [
+                        {
+                            in: 10,
+                            out: 0
+                        }
+                    ]
+                }
+            }
+        }
         address: {
             create: {
                 town: "Manghopir",
@@ -177,6 +190,19 @@ mutation {
                     }
                 }
             ]
+        }
+        bottle: {
+            create: {
+                balance: 5
+                bottleTransactions: {
+                    create: [
+                        {
+                            in: 10,
+                            out: 0
+                        }
+                    ]
+                }
+            }
         }
     }) {
         id
