@@ -50,7 +50,7 @@ type Product {
 type Discount {
   id: ID! @unique
   product: Product!
-  discount: Int! @default(value: 0)
+  discount: Float! @default(value: 0)
   user: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -86,8 +86,8 @@ type Item {
   id: ID! @unique
   product: Product!
   quantity: Int!
-  discount: Int! @default(value: 0)
-  total: Float!
+  discount: Float! @default(value: 0)
+  total: Int!
 }
 
 enum TransactionType {
@@ -103,8 +103,8 @@ enum TransactionStatus {
 
 type Payment {
   id: ID! @unique
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod! @default(value: CASH)
   status: PaymentStatus @default(value: UNPAID)
   createdAt: DateTime! @createdAt

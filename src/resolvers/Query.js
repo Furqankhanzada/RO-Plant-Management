@@ -10,6 +10,13 @@ const Query = {
               role: 'CUSTOMER'
             }
         })
+    },
+    products(parent, args, { prisma }) {
+        return prisma.products({
+            where: {
+                ...args.where
+            }
+        })
     }
 };
 

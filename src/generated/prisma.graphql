@@ -1,5 +1,5 @@
 # source: https://ro-plant-d678feb064.herokuapp.com/ro-plant-backend/dev
-# timestamp: Wed May 08 2019 16:51:10 GMT+0500 (PKT)
+# timestamp: Tue May 14 2019 14:34:18 GMT+0500 (PKT)
 
 type Address implements Node {
   id: ID!
@@ -361,6 +361,14 @@ type AggregateAddress {
   count: Int!
 }
 
+type AggregateBottle {
+  count: Int!
+}
+
+type AggregateBottleTransaction {
+  count: Int!
+}
+
 type AggregateDiscount {
   count: Int!
 }
@@ -394,12 +402,632 @@ type BatchPayload {
   count: Long!
 }
 
+type Bottle implements Node {
+  id: ID!
+  balance: Int!
+  bottleTransactions(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BottleTransaction!]
+}
+
+"""A connection to a list of items."""
+type BottleConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BottleEdge]!
+  aggregate: AggregateBottle!
+}
+
+input BottleCreateInput {
+  balance: Int
+  bottleTransactions: BottleTransactionCreateManyInput
+}
+
+input BottleCreateOneInput {
+  create: BottleCreateInput
+  connect: BottleWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type BottleEdge {
+  """The item at the end of the edge."""
+  node: Bottle!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BottleOrderByInput {
+  id_ASC
+  id_DESC
+  balance_ASC
+  balance_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type BottlePreviousValues {
+  id: ID!
+  balance: Int!
+}
+
+type BottleSubscriptionPayload {
+  mutation: MutationType!
+  node: Bottle
+  updatedFields: [String!]
+  previousValues: BottlePreviousValues
+}
+
+input BottleSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BottleSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BottleSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BottleSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BottleWhereInput
+}
+
+type BottleTransaction implements Node {
+  id: ID!
+  in: Int!
+  out: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type BottleTransactionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BottleTransactionEdge]!
+  aggregate: AggregateBottleTransaction!
+}
+
+input BottleTransactionCreateInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionCreateManyInput {
+  create: [BottleTransactionCreateInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type BottleTransactionEdge {
+  """The item at the end of the edge."""
+  node: BottleTransaction!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum BottleTransactionOrderByInput {
+  id_ASC
+  id_DESC
+  in_ASC
+  in_DESC
+  out_ASC
+  out_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type BottleTransactionPreviousValues {
+  id: ID!
+  in: Int!
+  out: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input BottleTransactionScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BottleTransactionScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BottleTransactionScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BottleTransactionScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  in: Int
+
+  """All values that are not equal to given value."""
+  in_not: Int
+
+  """All values that are contained in given list."""
+  in_in: [Int!]
+
+  """All values that are not contained in given list."""
+  in_not_in: [Int!]
+
+  """All values less than the given value."""
+  in_lt: Int
+
+  """All values less than or equal the given value."""
+  in_lte: Int
+
+  """All values greater than the given value."""
+  in_gt: Int
+
+  """All values greater than or equal the given value."""
+  in_gte: Int
+  out: Int
+
+  """All values that are not equal to given value."""
+  out_not: Int
+
+  """All values that are contained in given list."""
+  out_in: [Int!]
+
+  """All values that are not contained in given list."""
+  out_not_in: [Int!]
+
+  """All values less than the given value."""
+  out_lt: Int
+
+  """All values less than or equal the given value."""
+  out_lte: Int
+
+  """All values greater than the given value."""
+  out_gt: Int
+
+  """All values greater than or equal the given value."""
+  out_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+type BottleTransactionSubscriptionPayload {
+  mutation: MutationType!
+  node: BottleTransaction
+  updatedFields: [String!]
+  previousValues: BottleTransactionPreviousValues
+}
+
+input BottleTransactionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BottleTransactionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BottleTransactionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BottleTransactionSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BottleTransactionWhereInput
+}
+
+input BottleTransactionUpdateDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyInput {
+  create: [BottleTransactionCreateInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+  disconnect: [BottleTransactionWhereUniqueInput!]
+  delete: [BottleTransactionWhereUniqueInput!]
+  update: [BottleTransactionUpdateWithWhereUniqueNestedInput!]
+  updateMany: [BottleTransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [BottleTransactionScalarWhereInput!]
+  upsert: [BottleTransactionUpsertWithWhereUniqueNestedInput!]
+}
+
+input BottleTransactionUpdateManyMutationInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyWithWhereNestedInput {
+  where: BottleTransactionScalarWhereInput!
+  data: BottleTransactionUpdateManyDataInput!
+}
+
+input BottleTransactionUpdateWithWhereUniqueNestedInput {
+  where: BottleTransactionWhereUniqueInput!
+  data: BottleTransactionUpdateDataInput!
+}
+
+input BottleTransactionUpsertWithWhereUniqueNestedInput {
+  where: BottleTransactionWhereUniqueInput!
+  update: BottleTransactionUpdateDataInput!
+  create: BottleTransactionCreateInput!
+}
+
+input BottleTransactionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BottleTransactionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BottleTransactionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BottleTransactionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  in: Int
+
+  """All values that are not equal to given value."""
+  in_not: Int
+
+  """All values that are contained in given list."""
+  in_in: [Int!]
+
+  """All values that are not contained in given list."""
+  in_not_in: [Int!]
+
+  """All values less than the given value."""
+  in_lt: Int
+
+  """All values less than or equal the given value."""
+  in_lte: Int
+
+  """All values greater than the given value."""
+  in_gt: Int
+
+  """All values greater than or equal the given value."""
+  in_gte: Int
+  out: Int
+
+  """All values that are not equal to given value."""
+  out_not: Int
+
+  """All values that are contained in given list."""
+  out_in: [Int!]
+
+  """All values that are not contained in given list."""
+  out_not_in: [Int!]
+
+  """All values less than the given value."""
+  out_lt: Int
+
+  """All values less than or equal the given value."""
+  out_lte: Int
+
+  """All values greater than the given value."""
+  out_gt: Int
+
+  """All values greater than or equal the given value."""
+  out_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+input BottleTransactionWhereUniqueInput {
+  id: ID
+}
+
+input BottleUpdateDataInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyInput
+}
+
+input BottleUpdateInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyInput
+}
+
+input BottleUpdateManyMutationInput {
+  balance: Int
+}
+
+input BottleUpdateOneInput {
+  create: BottleCreateInput
+  connect: BottleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: BottleUpdateDataInput
+  upsert: BottleUpsertNestedInput
+}
+
+input BottleUpsertNestedInput {
+  update: BottleUpdateDataInput!
+  create: BottleCreateInput!
+}
+
+input BottleWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BottleWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BottleWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BottleWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  balance: Int
+
+  """All values that are not equal to given value."""
+  balance_not: Int
+
+  """All values that are contained in given list."""
+  balance_in: [Int!]
+
+  """All values that are not contained in given list."""
+  balance_not_in: [Int!]
+
+  """All values less than the given value."""
+  balance_lt: Int
+
+  """All values less than or equal the given value."""
+  balance_lte: Int
+
+  """All values greater than the given value."""
+  balance_gt: Int
+
+  """All values greater than or equal the given value."""
+  balance_gte: Int
+  bottleTransactions_every: BottleTransactionWhereInput
+  bottleTransactions_some: BottleTransactionWhereInput
+  bottleTransactions_none: BottleTransactionWhereInput
+}
+
+input BottleWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 type Discount implements Node {
   id: ID!
   product: Product!
-  discount: Int!
+  discount: Float!
   user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -416,7 +1044,7 @@ type DiscountConnection {
 }
 
 input DiscountCreateInput {
-  discount: Int
+  discount: Float
   product: ProductCreateOneInput!
   user: UserCreateOneWithoutDiscountsInput!
 }
@@ -427,7 +1055,7 @@ input DiscountCreateManyWithoutUserInput {
 }
 
 input DiscountCreateWithoutUserInput {
-  discount: Int
+  discount: Float
   product: ProductCreateOneInput!
 }
 
@@ -453,7 +1081,7 @@ enum DiscountOrderByInput {
 
 type DiscountPreviousValues {
   id: ID!
-  discount: Int!
+  discount: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -507,28 +1135,28 @@ input DiscountScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  discount: Int
+  discount: Float
 
   """All values that are not equal to given value."""
-  discount_not: Int
+  discount_not: Float
 
   """All values that are contained in given list."""
-  discount_in: [Int!]
+  discount_in: [Float!]
 
   """All values that are not contained in given list."""
-  discount_not_in: [Int!]
+  discount_not_in: [Float!]
 
   """All values less than the given value."""
-  discount_lt: Int
+  discount_lt: Float
 
   """All values less than or equal the given value."""
-  discount_lte: Int
+  discount_lte: Float
 
   """All values greater than the given value."""
-  discount_gt: Int
+  discount_gt: Float
 
   """All values greater than or equal the given value."""
-  discount_gte: Int
+  discount_gte: Float
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -613,17 +1241,17 @@ input DiscountSubscriptionWhereInput {
 }
 
 input DiscountUpdateInput {
-  discount: Int
+  discount: Float
   product: ProductUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutDiscountsInput
 }
 
 input DiscountUpdateManyDataInput {
-  discount: Int
+  discount: Float
 }
 
 input DiscountUpdateManyMutationInput {
-  discount: Int
+  discount: Float
 }
 
 input DiscountUpdateManyWithoutUserInput {
@@ -643,7 +1271,7 @@ input DiscountUpdateManyWithWhereNestedInput {
 }
 
 input DiscountUpdateWithoutUserDataInput {
-  discount: Int
+  discount: Float
   product: ProductUpdateOneRequiredInput
 }
 
@@ -707,28 +1335,28 @@ input DiscountWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  discount: Int
+  discount: Float
 
   """All values that are not equal to given value."""
-  discount_not: Int
+  discount_not: Float
 
   """All values that are contained in given list."""
-  discount_in: [Int!]
+  discount_in: [Float!]
 
   """All values that are not contained in given list."""
-  discount_not_in: [Int!]
+  discount_not_in: [Float!]
 
   """All values less than the given value."""
-  discount_lt: Int
+  discount_lt: Float
 
   """All values less than or equal the given value."""
-  discount_lte: Int
+  discount_lte: Float
 
   """All values greater than the given value."""
-  discount_gt: Int
+  discount_gt: Float
 
   """All values greater than or equal the given value."""
-  discount_gte: Int
+  discount_gte: Float
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -785,8 +1413,8 @@ type Item implements Node {
   id: ID!
   product: Product!
   quantity: Int!
-  discount: Int!
-  total: Float!
+  discount: Float!
+  total: Int!
 }
 
 """A connection to a list of items."""
@@ -801,8 +1429,8 @@ type ItemConnection {
 
 input ItemCreateInput {
   quantity: Int!
-  discount: Int
-  total: Float!
+  discount: Float
+  total: Int!
   product: ProductCreateOneInput!
 }
 
@@ -838,8 +1466,8 @@ enum ItemOrderByInput {
 type ItemPreviousValues {
   id: ID!
   quantity: Int!
-  discount: Int!
-  total: Float!
+  discount: Float!
+  total: Int!
 }
 
 input ItemScalarWhereInput {
@@ -913,50 +1541,50 @@ input ItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
-  discount: Int
+  discount: Float
 
   """All values that are not equal to given value."""
-  discount_not: Int
+  discount_not: Float
 
   """All values that are contained in given list."""
-  discount_in: [Int!]
+  discount_in: [Float!]
 
   """All values that are not contained in given list."""
-  discount_not_in: [Int!]
+  discount_not_in: [Float!]
 
   """All values less than the given value."""
-  discount_lt: Int
+  discount_lt: Float
 
   """All values less than or equal the given value."""
-  discount_lte: Int
+  discount_lte: Float
 
   """All values greater than the given value."""
-  discount_gt: Int
+  discount_gt: Float
 
   """All values greater than or equal the given value."""
-  discount_gte: Int
-  total: Float
+  discount_gte: Float
+  total: Int
 
   """All values that are not equal to given value."""
-  total_not: Float
+  total_not: Int
 
   """All values that are contained in given list."""
-  total_in: [Float!]
+  total_in: [Int!]
 
   """All values that are not contained in given list."""
-  total_not_in: [Float!]
+  total_not_in: [Int!]
 
   """All values less than the given value."""
-  total_lt: Float
+  total_lt: Int
 
   """All values less than or equal the given value."""
-  total_lte: Float
+  total_lte: Int
 
   """All values greater than the given value."""
-  total_gt: Float
+  total_gt: Int
 
   """All values greater than or equal the given value."""
-  total_gte: Float
+  total_gte: Int
 }
 
 type ItemSubscriptionPayload {
@@ -998,22 +1626,22 @@ input ItemSubscriptionWhereInput {
 
 input ItemUpdateDataInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
   product: ProductUpdateOneRequiredInput
 }
 
 input ItemUpdateInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
   product: ProductUpdateOneRequiredInput
 }
 
 input ItemUpdateManyDataInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateManyInput {
@@ -1029,8 +1657,8 @@ input ItemUpdateManyInput {
 
 input ItemUpdateManyMutationInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateManyWithWhereNestedInput {
@@ -1120,50 +1748,50 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
-  discount: Int
+  discount: Float
 
   """All values that are not equal to given value."""
-  discount_not: Int
+  discount_not: Float
 
   """All values that are contained in given list."""
-  discount_in: [Int!]
+  discount_in: [Float!]
 
   """All values that are not contained in given list."""
-  discount_not_in: [Int!]
+  discount_not_in: [Float!]
 
   """All values less than the given value."""
-  discount_lt: Int
+  discount_lt: Float
 
   """All values less than or equal the given value."""
-  discount_lte: Int
+  discount_lte: Float
 
   """All values greater than the given value."""
-  discount_gt: Int
+  discount_gt: Float
 
   """All values greater than or equal the given value."""
-  discount_gte: Int
-  total: Float
+  discount_gte: Float
+  total: Int
 
   """All values that are not equal to given value."""
-  total_not: Float
+  total_not: Int
 
   """All values that are contained in given list."""
-  total_in: [Float!]
+  total_in: [Int!]
 
   """All values that are not contained in given list."""
-  total_not_in: [Float!]
+  total_not_in: [Int!]
 
   """All values less than the given value."""
-  total_lt: Float
+  total_lt: Int
 
   """All values less than or equal the given value."""
-  total_lte: Float
+  total_lte: Int
 
   """All values greater than the given value."""
-  total_gt: Float
+  total_gt: Int
 
   """All values greater than or equal the given value."""
-  total_gte: Float
+  total_gte: Int
   product: ProductWhereInput
 }
 
@@ -1402,7 +2030,9 @@ type Mutation {
   createTransaction(data: TransactionCreateInput!): Transaction!
   createPayment(data: PaymentCreateInput!): Payment!
   createLocation(data: LocationCreateInput!): Location!
+  createBottleTransaction(data: BottleTransactionCreateInput!): BottleTransaction!
   createItem(data: ItemCreateInput!): Item!
+  createBottle(data: BottleCreateInput!): Bottle!
   createProduct(data: ProductCreateInput!): Product!
   createAddress(data: AddressCreateInput!): Address!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -1410,7 +2040,9 @@ type Mutation {
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
+  updateBottleTransaction(data: BottleTransactionUpdateInput!, where: BottleTransactionWhereUniqueInput!): BottleTransaction
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
+  updateBottle(data: BottleUpdateInput!, where: BottleWhereUniqueInput!): Bottle
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
   deleteUser(where: UserWhereUniqueInput!): User
@@ -1418,7 +2050,9 @@ type Mutation {
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deletePayment(where: PaymentWhereUniqueInput!): Payment
   deleteLocation(where: LocationWhereUniqueInput!): Location
+  deleteBottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
   deleteItem(where: ItemWhereUniqueInput!): Item
+  deleteBottle(where: BottleWhereUniqueInput!): Bottle
   deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteAddress(where: AddressWhereUniqueInput!): Address
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
@@ -1426,7 +2060,9 @@ type Mutation {
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
   upsertPayment(where: PaymentWhereUniqueInput!, create: PaymentCreateInput!, update: PaymentUpdateInput!): Payment!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
+  upsertBottleTransaction(where: BottleTransactionWhereUniqueInput!, create: BottleTransactionCreateInput!, update: BottleTransactionUpdateInput!): BottleTransaction!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
+  upsertBottle(where: BottleWhereUniqueInput!, create: BottleCreateInput!, update: BottleUpdateInput!): Bottle!
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
   upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -1434,7 +2070,9 @@ type Mutation {
   updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
   updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
+  updateManyBottleTransactions(data: BottleTransactionUpdateManyMutationInput!, where: BottleTransactionWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
+  updateManyBottles(data: BottleUpdateManyMutationInput!, where: BottleWhereInput): BatchPayload!
   updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
   updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -1442,7 +2080,9 @@ type Mutation {
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
   deleteManyPayments(where: PaymentWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
+  deleteManyBottleTransactions(where: BottleTransactionWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
+  deleteManyBottles(where: BottleWhereInput): BatchPayload!
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
   deleteManyAddresses(where: AddressWhereInput): BatchPayload!
 }
@@ -1476,8 +2116,8 @@ type PageInfo {
 
 type Payment implements Node {
   id: ID!
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod!
   status: PaymentStatus
   createdAt: DateTime!
@@ -1495,8 +2135,8 @@ type PaymentConnection {
 }
 
 input PaymentCreateInput {
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod
   status: PaymentStatus
 }
@@ -1540,8 +2180,8 @@ enum PaymentOrderByInput {
 
 type PaymentPreviousValues {
   id: ID!
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod!
   status: PaymentStatus
   createdAt: DateTime!
@@ -1591,22 +2231,22 @@ input PaymentSubscriptionWhereInput {
 }
 
 input PaymentUpdateDataInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
 
 input PaymentUpdateInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
 
 input PaymentUpdateManyMutationInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
@@ -1672,50 +2312,50 @@ input PaymentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  paid: Float
+  paid: Int
 
   """All values that are not equal to given value."""
-  paid_not: Float
+  paid_not: Int
 
   """All values that are contained in given list."""
-  paid_in: [Float!]
+  paid_in: [Int!]
 
   """All values that are not contained in given list."""
-  paid_not_in: [Float!]
+  paid_not_in: [Int!]
 
   """All values less than the given value."""
-  paid_lt: Float
+  paid_lt: Int
 
   """All values less than or equal the given value."""
-  paid_lte: Float
+  paid_lte: Int
 
   """All values greater than the given value."""
-  paid_gt: Float
+  paid_gt: Int
 
   """All values greater than or equal the given value."""
-  paid_gte: Float
-  balance: Float
+  paid_gte: Int
+  balance: Int
 
   """All values that are not equal to given value."""
-  balance_not: Float
+  balance_not: Int
 
   """All values that are contained in given list."""
-  balance_in: [Float!]
+  balance_in: [Int!]
 
   """All values that are not contained in given list."""
-  balance_not_in: [Float!]
+  balance_not_in: [Int!]
 
   """All values less than the given value."""
-  balance_lt: Float
+  balance_lt: Int
 
   """All values less than or equal the given value."""
-  balance_lte: Float
+  balance_lte: Int
 
   """All values greater than the given value."""
-  balance_gt: Float
+  balance_gt: Int
 
   """All values greater than or equal the given value."""
-  balance_gte: Float
+  balance_gte: Int
   method: PaymentMethod
 
   """All values that are not equal to given value."""
@@ -1789,7 +2429,7 @@ input PaymentWhereUniqueInput {
 type Product implements Node {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1806,7 +2446,7 @@ type ProductConnection {
 
 input ProductCreateInput {
   name: String!
-  price: Float!
+  price: Int!
 }
 
 input ProductCreateOneInput {
@@ -1839,7 +2479,7 @@ enum ProductOrderByInput {
 type ProductPreviousValues {
   id: ID!
   name: String!
-  price: Float!
+  price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1883,17 +2523,17 @@ input ProductSubscriptionWhereInput {
 
 input ProductUpdateDataInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateManyMutationInput {
   name: String
-  price: Float
+  price: Int
 }
 
 input ProductUpdateOneRequiredInput {
@@ -1997,28 +2637,28 @@ input ProductWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  price: Float
+  price: Int
 
   """All values that are not equal to given value."""
-  price_not: Float
+  price_not: Int
 
   """All values that are contained in given list."""
-  price_in: [Float!]
+  price_in: [Int!]
 
   """All values that are not contained in given list."""
-  price_not_in: [Float!]
+  price_not_in: [Int!]
 
   """All values less than the given value."""
-  price_lt: Float
+  price_lt: Int
 
   """All values less than or equal the given value."""
-  price_lte: Float
+  price_lte: Int
 
   """All values greater than the given value."""
-  price_gt: Float
+  price_gt: Int
 
   """All values greater than or equal the given value."""
-  price_gte: Float
+  price_gte: Int
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -2075,7 +2715,9 @@ type Query {
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
   payments(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Payment]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
+  bottleTransactions(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BottleTransaction]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
+  bottles(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bottle]!
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
   user(where: UserWhereUniqueInput!): User
@@ -2083,7 +2725,9 @@ type Query {
   transaction(where: TransactionWhereUniqueInput!): Transaction
   payment(where: PaymentWhereUniqueInput!): Payment
   location(where: LocationWhereUniqueInput!): Location
+  bottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
   item(where: ItemWhereUniqueInput!): Item
+  bottle(where: BottleWhereUniqueInput!): Bottle
   product(where: ProductWhereUniqueInput!): Product
   address(where: AddressWhereUniqueInput!): Address
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -2091,7 +2735,9 @@ type Query {
   transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
   paymentsConnection(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaymentConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
+  bottleTransactionsConnection(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleTransactionConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  bottlesConnection(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleConnection!
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
 
@@ -2105,6 +2751,7 @@ type Query {
 enum Role {
   ADMIN
   CUSTOMER
+  EMPLOYEE
 }
 
 type Subscription {
@@ -2113,7 +2760,9 @@ type Subscription {
   transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
   payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
+  bottleTransaction(where: BottleTransactionSubscriptionWhereInput): BottleTransactionSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+  bottle(where: BottleSubscriptionWhereInput): BottleSubscriptionPayload
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
 }
@@ -2533,10 +3182,12 @@ type User implements Node {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role!
   address: Address
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount!]
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
+  bottle: Bottle
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2555,10 +3206,12 @@ input UserCreateInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
   transactions: TransactionCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 input UserCreateOneWithoutDiscountsInput {
@@ -2575,18 +3228,22 @@ input UserCreateWithoutDiscountsInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   transactions: TransactionCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 input UserCreateWithoutTransactionsInput {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
 }
 
 """An edge in a connection."""
@@ -2607,6 +3264,8 @@ enum UserOrderByInput {
   mobile_DESC
   password_ASC
   password_DESC
+  type_ASC
+  type_DESC
   role_ASC
   role_DESC
   createdAt_ASC
@@ -2620,6 +3279,7 @@ type UserPreviousValues {
   name: String
   mobile: String!
   password: String!
+  type: UserType
   role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -2662,20 +3322,28 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+enum UserType {
+  RESIDENTIAL
+  COMMERCIAL
+}
+
 input UserUpdateInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
   transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
 }
 
@@ -2699,18 +3367,22 @@ input UserUpdateWithoutDiscountsDataInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpdateWithoutTransactionsDataInput {
   name: String
   mobile: String
   password: String
+  type: UserType
   role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
 }
 
 input UserUpsertWithoutDiscountsInput {
@@ -2892,6 +3564,16 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  type: UserType
+
+  """All values that are not equal to given value."""
+  type_not: UserType
+
+  """All values that are contained in given list."""
+  type_in: [UserType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [UserType!]
   role: Role
 
   """All values that are not equal to given value."""
@@ -2953,6 +3635,7 @@ input UserWhereInput {
   transactions_every: TransactionWhereInput
   transactions_some: TransactionWhereInput
   transactions_none: TransactionWhereInput
+  bottle: BottleWhereInput
 }
 
 input UserWhereUniqueInput {

@@ -586,7 +586,7 @@ scalar DateTime
 type Discount {
   id: ID!
   product: Product!
-  discount: Int!
+  discount: Float!
   user: User!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -600,7 +600,7 @@ type DiscountConnection {
 
 input DiscountCreateInput {
   product: ProductCreateOneInput!
-  discount: Int
+  discount: Float
   user: UserCreateOneWithoutDiscountsInput!
 }
 
@@ -611,7 +611,7 @@ input DiscountCreateManyWithoutUserInput {
 
 input DiscountCreateWithoutUserInput {
   product: ProductCreateOneInput!
-  discount: Int
+  discount: Float
 }
 
 type DiscountEdge {
@@ -632,7 +632,7 @@ enum DiscountOrderByInput {
 
 type DiscountPreviousValues {
   id: ID!
-  discount: Int!
+  discount: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -652,14 +652,14 @@ input DiscountScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  discount: Int
-  discount_not: Int
-  discount_in: [Int!]
-  discount_not_in: [Int!]
-  discount_lt: Int
-  discount_lte: Int
-  discount_gt: Int
-  discount_gte: Int
+  discount: Float
+  discount_not: Float
+  discount_in: [Float!]
+  discount_not_in: [Float!]
+  discount_lt: Float
+  discount_lte: Float
+  discount_gt: Float
+  discount_gte: Float
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -701,16 +701,16 @@ input DiscountSubscriptionWhereInput {
 
 input DiscountUpdateInput {
   product: ProductUpdateOneRequiredInput
-  discount: Int
+  discount: Float
   user: UserUpdateOneRequiredWithoutDiscountsInput
 }
 
 input DiscountUpdateManyDataInput {
-  discount: Int
+  discount: Float
 }
 
 input DiscountUpdateManyMutationInput {
-  discount: Int
+  discount: Float
 }
 
 input DiscountUpdateManyWithoutUserInput {
@@ -732,7 +732,7 @@ input DiscountUpdateManyWithWhereNestedInput {
 
 input DiscountUpdateWithoutUserDataInput {
   product: ProductUpdateOneRequiredInput
-  discount: Int
+  discount: Float
 }
 
 input DiscountUpdateWithWhereUniqueWithoutUserInput {
@@ -762,14 +762,14 @@ input DiscountWhereInput {
   id_ends_with: ID
   id_not_ends_with: ID
   product: ProductWhereInput
-  discount: Int
-  discount_not: Int
-  discount_in: [Int!]
-  discount_not_in: [Int!]
-  discount_lt: Int
-  discount_lte: Int
-  discount_gt: Int
-  discount_gte: Int
+  discount: Float
+  discount_not: Float
+  discount_in: [Float!]
+  discount_not_in: [Float!]
+  discount_lt: Float
+  discount_lte: Float
+  discount_gt: Float
+  discount_gte: Float
   user: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
@@ -800,8 +800,8 @@ type Item {
   id: ID!
   product: Product!
   quantity: Int!
-  discount: Int!
-  total: Float!
+  discount: Float!
+  total: Int!
 }
 
 type ItemConnection {
@@ -813,8 +813,8 @@ type ItemConnection {
 input ItemCreateInput {
   product: ProductCreateOneInput!
   quantity: Int!
-  discount: Int
-  total: Float!
+  discount: Float
+  total: Int!
 }
 
 input ItemCreateManyInput {
@@ -841,8 +841,8 @@ enum ItemOrderByInput {
 type ItemPreviousValues {
   id: ID!
   quantity: Int!
-  discount: Int!
-  total: Float!
+  discount: Float!
+  total: Int!
 }
 
 input ItemScalarWhereInput {
@@ -868,22 +868,22 @@ input ItemScalarWhereInput {
   quantity_lte: Int
   quantity_gt: Int
   quantity_gte: Int
-  discount: Int
-  discount_not: Int
-  discount_in: [Int!]
-  discount_not_in: [Int!]
-  discount_lt: Int
-  discount_lte: Int
-  discount_gt: Int
-  discount_gte: Int
-  total: Float
-  total_not: Float
-  total_in: [Float!]
-  total_not_in: [Float!]
-  total_lt: Float
-  total_lte: Float
-  total_gt: Float
-  total_gte: Float
+  discount: Float
+  discount_not: Float
+  discount_in: [Float!]
+  discount_not_in: [Float!]
+  discount_lt: Float
+  discount_lte: Float
+  discount_gt: Float
+  discount_gte: Float
+  total: Int
+  total_not: Int
+  total_in: [Int!]
+  total_not_in: [Int!]
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
   AND: [ItemScalarWhereInput!]
   OR: [ItemScalarWhereInput!]
   NOT: [ItemScalarWhereInput!]
@@ -910,21 +910,21 @@ input ItemSubscriptionWhereInput {
 input ItemUpdateDataInput {
   product: ProductUpdateOneRequiredInput
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateInput {
   product: ProductUpdateOneRequiredInput
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateManyDataInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateManyInput {
@@ -941,8 +941,8 @@ input ItemUpdateManyInput {
 
 input ItemUpdateManyMutationInput {
   quantity: Int
-  discount: Int
-  total: Float
+  discount: Float
+  total: Int
 }
 
 input ItemUpdateManyWithWhereNestedInput {
@@ -985,22 +985,22 @@ input ItemWhereInput {
   quantity_lte: Int
   quantity_gt: Int
   quantity_gte: Int
-  discount: Int
-  discount_not: Int
-  discount_in: [Int!]
-  discount_not_in: [Int!]
-  discount_lt: Int
-  discount_lte: Int
-  discount_gt: Int
-  discount_gte: Int
-  total: Float
-  total_not: Float
-  total_in: [Float!]
-  total_not_in: [Float!]
-  total_lt: Float
-  total_lte: Float
-  total_gt: Float
-  total_gte: Float
+  discount: Float
+  discount_not: Float
+  discount_in: [Float!]
+  discount_not_in: [Float!]
+  discount_lt: Float
+  discount_lte: Float
+  discount_gt: Float
+  discount_gte: Float
+  total: Int
+  total_not: Int
+  total_in: [Int!]
+  total_not_in: [Int!]
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
   AND: [ItemWhereInput!]
   OR: [ItemWhereInput!]
   NOT: [ItemWhereInput!]
@@ -1223,8 +1223,8 @@ type PageInfo {
 
 type Payment {
   id: ID!
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod!
   status: PaymentStatus
   createdAt: DateTime!
@@ -1238,8 +1238,8 @@ type PaymentConnection {
 }
 
 input PaymentCreateInput {
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod
   status: PaymentStatus
 }
@@ -1279,8 +1279,8 @@ enum PaymentOrderByInput {
 
 type PaymentPreviousValues {
   id: ID!
-  paid: Float!
-  balance: Float!
+  paid: Int!
+  balance: Int!
   method: PaymentMethod!
   status: PaymentStatus
   createdAt: DateTime!
@@ -1311,22 +1311,22 @@ input PaymentSubscriptionWhereInput {
 }
 
 input PaymentUpdateDataInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
 
 input PaymentUpdateInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
 
 input PaymentUpdateManyMutationInput {
-  paid: Float
-  balance: Float
+  paid: Int
+  balance: Int
   method: PaymentMethod
   status: PaymentStatus
 }
@@ -1358,22 +1358,22 @@ input PaymentWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  paid: Float
-  paid_not: Float
-  paid_in: [Float!]
-  paid_not_in: [Float!]
-  paid_lt: Float
-  paid_lte: Float
-  paid_gt: Float
-  paid_gte: Float
-  balance: Float
-  balance_not: Float
-  balance_in: [Float!]
-  balance_not_in: [Float!]
-  balance_lt: Float
-  balance_lte: Float
-  balance_gt: Float
-  balance_gte: Float
+  paid: Int
+  paid_not: Int
+  paid_in: [Int!]
+  paid_not_in: [Int!]
+  paid_lt: Int
+  paid_lte: Int
+  paid_gt: Int
+  paid_gte: Int
+  balance: Int
+  balance_not: Int
+  balance_in: [Int!]
+  balance_not_in: [Int!]
+  balance_lt: Int
+  balance_lte: Int
+  balance_gt: Int
+  balance_gte: Int
   method: PaymentMethod
   method_not: PaymentMethod
   method_in: [PaymentMethod!]
