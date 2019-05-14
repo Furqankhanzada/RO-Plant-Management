@@ -10,7 +10,7 @@ const Subscription = {
     resolve: payload => {
       return payload
     },
-  },
-}
+  }
+};
 
-module.exports = { Subscription }
+module.exports = { Subscription };

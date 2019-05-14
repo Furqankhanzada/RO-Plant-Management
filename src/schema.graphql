@@ -103,9 +103,58 @@ type Query {
   products(where: ProductWhereInput): [Product]
 }
 
+input LocationWhereUniqueInput {
+  id: ID
+}
+
+input LocationCreateInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
+
+input AddressCreateInput {
+  town: String
+  area: String
+  block: String
+  house: String
+  location: LocationCreateOneInput
+}
+
+input AddressCreateOneInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
+}
+
+input DiscountCreateInput {
+  discount: Float
+  product: ID!
+  user: ID!
+}
+
+input UserCreateInput {
+  name: String
+  mobile: String!
+  password: String!
+  type: UserType
+  role: Role
+  address: AddressCreateOneInput
+  discounts: DiscountCreateInput
+#  transactions: TransactionCreateManyWithoutUserInput
+#  bottle: BottleCreateOneInput
+}
+
 type Mutation {
-  signup(mobile: String!, password: String!, name: String!): AuthPayload!
   login(mobile: String!, password: String!): AuthPayload!
+  createCustomer(data: UserCreateInput!): User!
 }
 
 type Subscription {
