@@ -136,8 +136,36 @@ input AddressCreateOneInput {
 
 input DiscountCreateInput {
   discount: Float
-  product: ID!
-  user: ID!
+  product: ProductCreateOneInput!
+  user: UserCreateOneWithoutDiscountsInput!
+}
+
+input DiscountCreateManyWithoutUserInput {
+  create: [DiscountCreateWithoutUserInput!]
+  connect: [DiscountWhereUniqueInput!]
+}
+
+input DiscountCreateWithoutUserInput {
+  discount: Float
+  product: ProductCreateOneInput!
+}
+
+input PaymentWhereUniqueInput {
+  id: ID
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+input ProductCreateInput {
+  name: String!
+  price: Int!
+}
+
+input ProductCreateOneInput {
+  create: ProductCreateInput
+  connect: ProductWhereUniqueInput
 }
 
 input UserCreateInput {
