@@ -1,0 +1,15 @@
+type Address {
+  id: ID!
+  town: String
+  area: String
+  block: String
+  house: String
+  location: Location
+}
+
+type Location {
+  id: ID!
+  latitude: Float!
+  longitude: Float!
+}
+
