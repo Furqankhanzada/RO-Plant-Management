@@ -1,0 +1,13 @@
+type User {
+  id: ID!
+  name: String
+  mobile: String!
+  type: UserType
+  role: Role!
+  address: Address
+  discounts: [Discount]
+  transactions: [Transaction]
+  bottle: Bottle
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

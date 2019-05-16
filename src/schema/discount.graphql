@@ -1,0 +1,8 @@
+type Discount {
+  id: ID!
+  product: Product!
+  discount: Float!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

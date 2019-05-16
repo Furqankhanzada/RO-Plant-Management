@@ -1,0 +1,128 @@
+type Mutation {
+  login(mobile: String!, password: String!): AuthPayload!
+  createCustomer(data: UserCreateInput!): User!
+}
+
+input UserCreateInput {
+  name: String
+  mobile: String!
+  password: String!
+  type: UserType
+  role: Role
+  address: AddressCreateOneInput
+  discounts: DiscountCreateInput
+#  transactions: TransactionCreateManyWithoutUserInput
+#  bottle: BottleCreateOneInput
+}
+
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+enum UserType {
+  RESIDENTIAL
+  COMMERCIAL
+}
+
+
+enum Role {
+  ADMIN
+  CUSTOMER
+  EMPLOYE
+}
+
+
+input AddressCreateInput {
+  town: String
+  area: String
+  block: String
+  house: String
+  location: LocationCreateOneInput
+}
+
+
+input LocationCreateOneInput {
+  create: LocationCreateInput
+  connect: LocationWhereUniqueInput
+}
+
+input LocationCreateInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+input LocationWhereUniqueInput {
+  id: ID
+}
+
+input DiscountCreateInput {
+  discount: Float
+  product: ProductCreateOneInput!
+  user: UserCreateOneWithoutDiscountsInput!
+}
+
+
+
+input UserCreateOneWithoutDiscountsInput {
+  create: UserCreateWithoutDiscountsInput
+  connect: UserWhereUniqueInput
+}
+
+
+input DiscountCreateManyWithoutUserInput {
+  create: [DiscountCreateWithoutUserInput!]
+  connect: [DiscountWhereUniqueInput!]
+}
+
+input DiscountWhereUniqueInput {
+  id: ID
+}
+
+input DiscountCreateWithoutUserInput {
+  discount: Float
+  product: ProductCreateOneInput!
+}
+
+
+
+
+input UserCreateWithoutDiscountsInput {
+  name: String
+  mobile: String!
+  password: String!
+  type: UserType
+  role: Role
+  address: AddressCreateOneInput
+}
+
+input AddressCreateOneInput {
+  create: AddressCreateInput
+  connect: AddressWhereUniqueInput
+}
+
+input AddressWhereUniqueInput {
+  id: ID
+}
+
+
+input UserWhereUniqueInput {
+  id: ID
+  mobile: String
+}
+
+
+input ProductCreateOneInput {
+  create: ProductCreateInput
+  connect: ProductWhereUniqueInput
+}
+
+input ProductCreateInput {
+  name: String!
+  price: Int!
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}

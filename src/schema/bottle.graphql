@@ -1,0 +1,13 @@
+type Bottle {
+  id: ID!
+  balance: Int!
+  bottleTransactions: [BottleTransaction]
+}
+
+type BottleTransaction {
+  id: ID!
+  in: Int!
+  out: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

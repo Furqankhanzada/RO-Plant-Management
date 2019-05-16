@@ -1,0 +1,5 @@
+type Query {
+  me: User
+  customers(where: UserWhereInput): [User]
+  products(where: ProductWhereInput): [Product]
+}

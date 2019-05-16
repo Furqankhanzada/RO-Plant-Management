@@ -1,0 +1,50 @@
+type Transaction {
+  id: ID!
+  type: TransactionType!
+  status: TransactionStatus!
+  items: [Item!]!
+  payment: Payment!
+  user: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum TransactionType {
+  SELL
+  PURCHASE
+}
+
+enum TransactionStatus {
+  PENDING
+  PROCESSING,
+  COMPLETED
+}
+
+type Item {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  discount: Float!
+  total: Int!
+}
+
+type Payment {
+  id: ID!
+  paid: Int!
+  balance: Int!
+  method: PaymentMethod!
+  status: PaymentStatus
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CHEQUE
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}

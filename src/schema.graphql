@@ -140,6 +140,32 @@ input DiscountCreateInput {
   user: UserCreateOneWithoutDiscountsInput!
 }
 
+
+input UserCreateOneWithoutDiscountsInput {
+  create: UserCreateWithoutDiscountsInput
+  connect: UserWhereUniqueInput
+}
+
+
+input UserWhereUniqueInput {
+  id: ID
+  mobile: String
+}
+
+input DiscountWhereUniqueInput {
+  id: ID
+}
+
+
+input UserCreateWithoutDiscountsInput {
+  name: String
+  mobile: String!
+  password: String!
+  type: UserType
+  role: Role
+  address: AddressCreateOneInput
+}
+
 input DiscountCreateManyWithoutUserInput {
   create: [DiscountCreateWithoutUserInput!]
   connect: [DiscountWhereUniqueInput!]
