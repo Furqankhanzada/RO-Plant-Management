@@ -209,6 +209,7 @@ input UserCreateInput {
 type Mutation {
   login(mobile: String!, password: String!): AuthPayload!
   createCustomer(data: UserCreateInput!): User!
+  createProduct(data: ProductCreateInput!): User!
 }
 
 type Subscription {
