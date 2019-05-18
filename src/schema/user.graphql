@@ -1,3 +1,10 @@
+# import Address from 'address.graphql'
+# import Discount from 'discount.graphql'
+# import Transaction from 'transaction.graphql'
+# import Bottle from 'bottle.graphql'
+scalar DateTime
+
+
 type User {
   id: ID!
   name: String

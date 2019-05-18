@@ -1,3 +1,6 @@
+# import Product from 'product.graphql'
+# import User from 'user.graphql'
+# import UserType from 'mutation.graphql'
 type Discount {
   id: ID!
   product: Product!

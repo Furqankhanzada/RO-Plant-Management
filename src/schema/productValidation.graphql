@@ -1,3 +1,4 @@
+scalar DateTime
 
 input ProductWhereInput {
   id: ID

@@ -1,3 +1,5 @@
+scalar DateTime
+  
 type Product {
   id: ID!
   name: String!

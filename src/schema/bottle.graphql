@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Bottle {
   id: ID!
   balance: Int!
