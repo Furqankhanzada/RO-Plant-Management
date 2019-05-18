@@ -12,7 +12,7 @@ input UserCreateInput {
   type: UserType
   role: Role
   address: AddressCreateOneInput
-  discounts: DiscountCreateInput
+  discounts: DiscountCreateManyWithoutUserInput
 #  transactions: TransactionCreateManyWithoutUserInput
 #  bottle: BottleCreateOneInput
 }
