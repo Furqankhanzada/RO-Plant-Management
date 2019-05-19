@@ -5,10 +5,10 @@ type User {
   password: String!
   type: UserType @default(value: RESIDENTIAL)
   role: Role! @default(value: CUSTOMER)
-  address: Address
-  discounts: [Discount]
-  transactions: [Transaction]
-  bottle: Bottle
+  address: Address @relation(name: "UserAddress" onDelete: CASCADE)
+  discounts: [Discount] @relation(name: "DiscountsByUser" onDelete: CASCADE)
+  transactions: [Transaction] @relation(name: "TransactionsByUser" onDelete: CASCADE)
+  bottle: Bottle @relation(name: "Bottle" onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -30,7 +30,7 @@ type Address {
   area: String
   block: String
   house: String
-  location: Location
+  location: Location @relation(name: "AddressLocation" onDelete: CASCADE)
 }
 
 type Location {
@@ -51,7 +51,7 @@ type Discount {
   id: ID! @unique
   product: Product!
   discount: Float! @default(value: 0)
-  user: User!
+  user: User! @relation(name: "DiscountsByUser")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -60,9 +60,9 @@ type Transaction {
   id: ID! @unique
   type: TransactionType! @default(value: SELL)
   status: TransactionStatus! @default(value: PENDING)
-  items: [Item!]!
-  payment: Payment!
-  user: User
+  items: [Item!]! @relation(name: "ItemsByTransactions" onDelete: CASCADE)
+  payment: Payment! @relation(name: "PaymentByTransactions" onDelete: CASCADE)
+  user: User! @relation(name: "TransactionsByUser")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -71,11 +71,12 @@ type Transaction {
 type Bottle {
   id: ID! @unique
   balance: Int! @default(value: 0)
-  bottleTransactions: [BottleTransaction]
+  bottleTransactions: [BottleTransaction] @relation(name: "BottleTransactions" onDelete: CASCADE)
 }
 
 type BottleTransaction {
   id: ID! @unique
+  bottle: Bottle! @relation(name: "BottleTransactions")
   in: Int! @default(value: 0)
   out: Int! @default(value: 0)
   createdAt: DateTime! @createdAt
