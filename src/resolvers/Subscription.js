@@ -3,7 +3,7 @@ const Subscription = {
     subscribe: async (parent, args, context) => {
       return context.prisma.$subscribe
         .user({
-          mutation_in: ['CREATED', 'UPDATED'],
+          mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
         })
         .node()
     },

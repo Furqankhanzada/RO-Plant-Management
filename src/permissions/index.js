@@ -19,7 +19,9 @@ const permissions = shield({
         products: rules.isAuthenticated
     },
     Mutation: {
-
+        createCustomer: and(rules.isAuthenticated, rules.isAdmin),
+        deleteCustomer: and(rules.isAuthenticated, rules.isAdmin),
+        createProduct: and(rules.isAuthenticated, rules.isAdmin)
     },
 });
 
