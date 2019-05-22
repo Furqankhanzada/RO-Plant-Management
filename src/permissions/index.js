@@ -16,6 +16,7 @@ const permissions = shield({
     Query: {
         me: rules.isAuthenticated,
         customers: and(rules.isAuthenticated, rules.isAdmin),
+        customer: rules.isAuthenticated,
         products: rules.isAuthenticated
     },
     Mutation: {

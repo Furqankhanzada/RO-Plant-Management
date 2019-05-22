@@ -21,9 +21,6 @@ const mutation = importSchema("src/schema/mutation.graphql");
 
 // const typeDef = address + bottle + discount + product + productValidation + userValidation + query + transaction + user + mutation
 
-console.log(address , bottle, discount,' a++++++++++++++++++b')
-
-
 
 
 // const typeDef = [transaction, user, query, productValidation,userValidation, product, discount, bottle, address]

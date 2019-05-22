@@ -11,13 +11,8 @@ const Query = {
             }
         })
     },
-    customer(parent, args, ctx, info) {
-        return prisma.users({
-            where: {
-                ...args.where,
-                role: 'CUSTOMER'
-            }
-        })
+    customer(parent, args, { prisma }) {
+        return prisma.user({id:args.where.id})
     },
     products(parent, args, { prisma }) {
         return prisma.products({
