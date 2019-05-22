@@ -101,6 +101,11 @@ type Query {
   me: User
   customers(where: UserWhereInput): [User]
   products(where: ProductWhereInput): [Product]
+  customer(where: SingleUser): [User]
+}
+
+input SingleUser {
+  id: ID
 }
 
 input LocationWhereUniqueInput {
