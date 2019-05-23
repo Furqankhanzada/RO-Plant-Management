@@ -21,6 +21,7 @@ const permissions = shield({
     },
     Mutation: {
         createCustomer: and(rules.isAuthenticated, rules.isAdmin),
+        updateCustomer: and(rules.isAuthenticated, rules.isAdmin),
         deleteCustomer: and(rules.isAuthenticated, rules.isAdmin),
         createProduct: and(rules.isAuthenticated, rules.isAdmin)
     },

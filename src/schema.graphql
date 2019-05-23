@@ -96,16 +96,56 @@ input ProductWhereInput {
   updatedAt_gte: DateTime
 }
 
+input DiscountScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  discount: Float
+  discount_not: Float
+  discount_in: [Float!]
+  discount_not_in: [Float!]
+  discount_lt: Float
+  discount_lte: Float
+  discount_gt: Float
+  discount_gte: Float
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [DiscountScalarWhereInput!]
+  OR: [DiscountScalarWhereInput!]
+  NOT: [DiscountScalarWhereInput!]
+}
+
 
 type Query {
   me: User
   customers(where: UserWhereInput): [User]
   products(where: ProductWhereInput): [Product]
   customer(where: UserWhereUniqueInput): User
-}
-
-input SingleUser {
-  id: ID
 }
 
 input LocationWhereUniqueInput {
@@ -214,9 +254,125 @@ input UserCreateInput {
 type Mutation {
   login(mobile: String!, password: String!): AuthPayload!
   createCustomer(data: UserCreateInput!): User!
+  updateCustomer(data: UserUpdateInput!, id: ID): User!
   deleteCustomer(where: UserWhereUniqueInput!): User
   createProduct(data: ProductCreateInput!): User!
 }
+
+
+input UserUpdateInput {
+ name: String
+  mobile: String
+  password: String
+  type: UserType
+  role: Role
+  address: AddressUpdateOneInput
+  discounts: DiscountUpdateManyWithoutUserInput
+#  transactions: TransactionCreateManyWithoutUserInput
+#  bottle: BottleCreateOneInput
+}
+
+input DiscountUpdateManyWithoutUserInput {
+  create: [DiscountCreateWithoutUserInput!]
+  delete: [DiscountWhereUniqueInput!]
+  connect: [DiscountWhereUniqueInput!]
+  set: [DiscountWhereUniqueInput!]
+  disconnect: [DiscountWhereUniqueInput!]
+  update: [DiscountUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [DiscountUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [DiscountScalarWhereInput!]
+  updateMany: [DiscountUpdateManyWithWhereNestedInput!]
+}
+
+input DiscountUpdateManyWithWhereNestedInput {
+  where: DiscountScalarWhereInput!
+  data: DiscountUpdateManyDataInput!
+}
+
+input DiscountUpdateManyDataInput {
+  discount: Float
+}
+
+input DiscountUpsertWithWhereUniqueWithoutUserInput {
+  where: DiscountWhereUniqueInput!
+  update: DiscountUpdateWithoutUserDataInput!
+  create: DiscountCreateWithoutUserInput!
+}
+
+
+input DiscountUpdateWithoutUserDataInput {
+  product: ProductUpdateOneRequiredInput
+  discount: Float
+}
+
+
+
+input ProductUpdateOneRequiredInput {
+  create: ProductCreateInput
+  update: ProductUpdateDataInput
+  upsert: ProductUpsertNestedInput
+  connect: ProductWhereUniqueInput
+}
+
+
+input ProductUpsertNestedInput {
+  update: ProductUpdateDataInput!
+  create: ProductCreateInput!
+}
+
+input ProductUpdateDataInput {
+  name: String
+  price: Int
+}
+
+input DiscountUpdateWithWhereUniqueWithoutUserInput {
+  where: DiscountWhereUniqueInput!
+  data: DiscountUpdateWithoutUserDataInput!
+}
+
+input AddressUpdateDataInput {
+  town: String
+  area: String
+  block: String
+  house: String
+  location: LocationUpdateOneInput
+}
+
+
+input LocationUpdateOneInput {
+  create: LocationCreateInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: LocationWhereUniqueInput
+}
+
+
+input LocationUpsertNestedInput {
+  update: LocationUpdateDataInput!
+  create: LocationCreateInput!
+}
+
+input LocationUpdateDataInput {
+  latitude: Float
+  longitude: Float
+}
+
+input AddressUpdateOneInput {
+  create: AddressCreateInput
+  update: AddressUpdateDataInput
+  upsert: AddressUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: AddressWhereUniqueInput
+}
+
+input AddressUpsertNestedInput {
+  update: AddressUpdateDataInput!
+  create: AddressCreateInput!
+}
+
 
 type Subscription {
   userSubscription: User
