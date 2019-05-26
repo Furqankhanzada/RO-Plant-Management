@@ -1,6 +1,8 @@
 scalar DateTime
 
 input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -19,7 +21,408 @@ input UserWhereInput {
   mobile_contains: String
   mobile_not: String
   mobile_in: [String!]
+  transactions_every: TransactionWhereInput
+  transactions_some: TransactionWhereInput
+  transactions_none: TransactionWhereInput
 }
+
+input TransactionWhereInput {
+  #Logical AND on all given filters.#
+  AND: [TransactionWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [TransactionWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [TransactionWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  type: TransactionType
+
+  #All values that are not equal to given value.#
+  type_not: TransactionType
+
+  #All values that are contained in given list.#
+  type_in: [TransactionType!]
+
+  #All values that are not contained in given list.#
+  type_not_in: [TransactionType!]
+  status: TransactionStatus
+
+  #All values that are not equal to given value.#
+  status_not: TransactionStatus
+
+  #All values that are contained in given list.#
+  status_in: [TransactionStatus!]
+
+  #All values that are not contained in given list.#
+  status_not_in: [TransactionStatus!]
+  createdAt: DateTime
+
+  #All values that are not equal to given value.#
+  createdAt_not: DateTime
+
+  #All values that are contained in given list.#
+  createdAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  createdAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  createdAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  createdAt_lte: DateTime
+
+  #All values greater than the given value.#
+  createdAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  #All values that are not equal to given value.#
+  updatedAt_not: DateTime
+
+  #All values that are contained in given list.#
+  updatedAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  updatedAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  updatedAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  updatedAt_lte: DateTime
+
+  #All values greater than the given value.#
+  updatedAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  updatedAt_gte: DateTime
+  items_every: ItemWhereInput
+  items_some: ItemWhereInput
+  items_none: ItemWhereInput
+  payment: PaymentWhereInput
+  user: UserWhereInput
+}
+
+input ItemWhereInput {
+  #Logical AND on all given filters.#
+  AND: [ItemWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [ItemWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [ItemWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  quantity: Int
+
+  #All values that are not equal to given value.#
+  quantity_not: Int
+
+  #All values that are contained in given list.#
+  quantity_in: [Int!]
+
+  #All values that are not contained in given list.#
+  quantity_not_in: [Int!]
+
+  #All values less than the given value.#
+  quantity_lt: Int
+
+  #All values less than or equal the given value.#
+  quantity_lte: Int
+
+  #All values greater than the given value.#
+  quantity_gt: Int
+
+  #All values greater than or equal the given value.#
+  quantity_gte: Int
+  discount: Float
+
+  #All values that are not equal to given value.#
+  discount_not: Float
+
+  #All values that are contained in given list.#
+  discount_in: [Float!]
+
+  #All values that are not contained in given list.#
+  discount_not_in: [Float!]
+
+  #All values less than the given value.#
+  discount_lt: Float
+
+  #All values less than or equal the given value.#
+  discount_lte: Float
+
+  #All values greater than the given value.#
+  discount_gt: Float
+
+  #All values greater than or equal the given value.#
+  discount_gte: Float
+  total: Int
+
+  #All values that are not equal to given value.#
+  total_not: Int
+
+  #All values that are contained in given list.#
+  total_in: [Int!]
+
+  #All values that are not contained in given list.#
+  total_not_in: [Int!]
+
+  #All values less than the given value.#
+  total_lt: Int
+
+  #All values less than or equal the given value.#
+  total_lte: Int
+
+  #All values greater than the given value.#
+  total_gt: Int
+
+  #All values greater than or equal the given value.#
+  total_gte: Int
+  product: ProductWhereInput
+}
+
+input PaymentWhereInput {
+  #Logical AND on all given filters.#
+  AND: [PaymentWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [PaymentWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [PaymentWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  paid: Int
+
+  #All values that are not equal to given value.#
+  paid_not: Int
+
+  #All values that are contained in given list.#
+  paid_in: [Int!]
+
+  #All values that are not contained in given list.#
+  paid_not_in: [Int!]
+
+  #All values less than the given value.#
+  paid_lt: Int
+
+  #All values less than or equal the given value.#
+  paid_lte: Int
+
+  #All values greater than the given value.#
+  paid_gt: Int
+
+  #All values greater than or equal the given value.#
+  paid_gte: Int
+  balance: Int
+
+  #All values that are not equal to given value.#
+  balance_not: Int
+
+  #All values that are contained in given list.#
+  balance_in: [Int!]
+
+  #All values that are not contained in given list.#
+  balance_not_in: [Int!]
+
+  #All values less than the given value.#
+  balance_lt: Int
+
+  #All values less than or equal the given value.#
+  balance_lte: Int
+
+  #All values greater than the given value.#
+  balance_gt: Int
+
+  #All values greater than or equal the given value.#
+  balance_gte: Int
+  method: PaymentMethod
+
+  #All values that are not equal to given value.#
+  method_not: PaymentMethod
+
+  #All values that are contained in given list.#
+  method_in: [PaymentMethod!]
+
+  #All values that are not contained in given list.#
+  method_not_in: [PaymentMethod!]
+  status: PaymentStatus
+
+  #All values that are not equal to given value.#
+  status_not: PaymentStatus
+
+  #All values that are contained in given list.#
+  status_in: [PaymentStatus!]
+
+  #All values that are not contained in given list.#
+  status_not_in: [PaymentStatus!]
+  createdAt: DateTime
+
+  #All values that are not equal to given value.#
+  createdAt_not: DateTime
+
+  #All values that are contained in given list.#
+  createdAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  createdAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  createdAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  createdAt_lte: DateTime
+
+  #All values greater than the given value.#
+  createdAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  #All values that are not equal to given value.#
+  updatedAt_not: DateTime
+
+  #All values that are contained in given list.#
+  updatedAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  updatedAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  updatedAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  updatedAt_lte: DateTime
+
+  #All values greater than the given value.#
+  updatedAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  updatedAt_gte: DateTime
+}
+
 
 input ProductWhereInput {
   id: ID
@@ -146,6 +549,7 @@ type Query {
   customers(where: UserWhereInput): [User]
   products(where: ProductWhereInput): [Product]
   customer(where: UserWhereUniqueInput): User
+  transactions(where: TransactionWhereInput): [Transaction]
 }
 
 input LocationWhereUniqueInput {
@@ -391,7 +795,7 @@ type User {
   role: Role!
   address: Address
   discounts: [Discount]
-  transactions: [Transaction]
+  transactions(where: TransactionWhereInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
   bottle: Bottle
   createdAt: DateTime!
   updatedAt: DateTime!
