@@ -150,6 +150,147 @@ input TransactionWhereUniqueInput {
   id: ID
 }
 
+input ItemScalarWhereInput {
+  #Logical AND on all given filters.#
+  AND: [ItemScalarWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [ItemScalarWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [ItemScalarWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  quantity: Int
+
+  #All values that are not equal to given value.#
+  quantity_not: Int
+
+  #All values that are contained in given list.#
+  quantity_in: [Int!]
+
+  #All values that are not contained in given list.#
+  quantity_not_in: [Int!]
+
+  #All values less than the given value.#
+  quantity_lt: Int
+
+  #All values less than or equal the given value.#
+  quantity_lte: Int
+
+  #All values greater than the given value.#
+  quantity_gt: Int
+
+  #All values greater than or equal the given value.#
+  quantity_gte: Int
+  discount: Float
+
+  #All values that are not equal to given value.#
+  discount_not: Float
+
+  #All values that are contained in given list.#
+  discount_in: [Float!]
+
+  #All values that are not contained in given list.#
+  discount_not_in: [Float!]
+
+  #All values less than the given value.#
+  discount_lt: Float
+
+  #All values less than or equal the given value.#
+  discount_lte: Float
+
+  #All values greater than the given value.#
+  discount_gt: Float
+
+  #All values greater than or equal the given value.#
+  discount_gte: Float
+  total: Int
+
+  #All values that are not equal to given value.#
+  total_not: Int
+
+  #All values that are contained in given list.#
+  total_in: [Int!]
+
+  #All values that are not contained in given list.#
+  total_not_in: [Int!]
+
+  #All values less than the given value.#
+  total_lt: Int
+
+  #All values less than or equal the given value.#
+  total_lte: Int
+
+  #All values greater than the given value.#
+  total_gt: Int
+
+  #All values greater than or equal the given value.#
+  total_gte: Int
+}
+
+input ItemSubscriptionWhereInput {
+  #Logical AND on all given filters.#
+  AND: [ItemSubscriptionWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [ItemSubscriptionWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [ItemSubscriptionWhereInput!]
+
+  #The subscription event gets dispatched when it's listed in mutation_in#
+  #mutation_in: [MutationType!]
+
+  #The subscription event gets only dispatched when one of the updated fields names is included in this list#
+  updatedFields_contains: String
+
+  #The subscription event gets only dispatched when all of the field names included in this list have been updated#
+  updatedFields_contains_every: [String!]
+
+  #The subscription event gets only dispatched when some of the field names included in this list have been updated#
+  updatedFields_contains_some: [String!]
+  node: ItemWhereInput
+}
+
 input ItemWhereInput {
   #Logical AND on all given filters.#
   AND: [ItemWhereInput!]
@@ -266,6 +407,77 @@ input ItemWhereInput {
   #All values greater than or equal the given value.#
   total_gte: Int
   product: ProductWhereInput
+}
+
+input ItemCreateInput {
+  id: ID
+  quantity: Int!
+  discount: Float
+  total: Int!
+  product: ProductCreateOneInput!
+}
+
+input ItemCreateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+}
+
+input ItemUpdateDataInput {
+  quantity: Int
+  discount: Float
+  total: Int
+  product: ProductUpdateOneRequiredInput
+}
+
+input ItemUpdateInput {
+  quantity: Int
+  discount: Float
+  total: Int
+  product: ProductUpdateOneRequiredInput
+}
+
+input ItemUpdateManyDataInput {
+  quantity: Int
+  discount: Float
+  total: Int
+}
+
+input ItemUpdateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueNestedInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
+}
+
+input ItemUpdateManyMutationInput {
+  quantity: Int
+  discount: Float
+  total: Int
+}
+
+input ItemUpdateManyWithWhereNestedInput {
+  where: ItemScalarWhereInput!
+  data: ItemUpdateManyDataInput!
+}
+
+input ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateDataInput!
+}
+
+input ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateDataInput!
+  create: ItemCreateInput!
+}
+
+input ItemWhereUniqueInput {
+  id: ID
 }
 
 input PaymentWhereInput {
@@ -666,6 +878,7 @@ type Mutation {
   updateCustomer(data: UserUpdateInput!, id: ID): User!
   createTransaction(data: TransactionCreateInput!): Transaction!
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
+  deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteCustomer(where: UserWhereUniqueInput!): User
   createProduct(data: ProductCreateInput!): User!
 }
@@ -808,6 +1021,89 @@ type User {
   updatedAt: DateTime!
 }
 
+input UserCreateOneWithoutTransactionsInput {
+  create: UserCreateWithoutTransactionsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTransactionsInput {
+  id: ID
+  name: String
+  mobile: String!
+  password: String!
+  type: UserType
+  role: Role
+  address: AddressCreateOneInput
+  discounts: DiscountCreateManyWithoutUserInput
+  bottle: BottleCreateOneInput
+}
+
+input UserUpdateInput {
+  name: String
+  mobile: String
+  password: String
+  type: UserType
+  role: Role
+  address: AddressUpdateOneInput
+  discounts: DiscountUpdateManyWithoutUserInput
+  transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  mobile: String
+  password: String
+  type: UserType
+  role: Role
+}
+
+input UserUpdateOneRequiredWithoutDiscountsInput {
+  create: UserCreateWithoutDiscountsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutDiscountsDataInput
+  upsert: UserUpsertWithoutDiscountsInput
+}
+
+input UserUpdateOneRequiredWithoutTransactionsInput {
+  create: UserCreateWithoutTransactionsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutTransactionsDataInput
+  upsert: UserUpsertWithoutTransactionsInput
+}
+
+input UserUpdateWithoutDiscountsDataInput {
+  name: String
+  mobile: String
+  password: String
+  type: UserType
+  role: Role
+  address: AddressUpdateOneInput
+  transactions: TransactionUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
+}
+
+input UserUpdateWithoutTransactionsDataInput {
+  name: String
+  mobile: String
+  password: String
+  type: UserType
+  role: Role
+  address: AddressUpdateOneInput
+  discounts: DiscountUpdateManyWithoutUserInput
+  bottle: BottleUpdateOneInput
+}
+
+input UserUpsertWithoutDiscountsInput {
+  update: UserUpdateWithoutDiscountsDataInput!
+  create: UserCreateWithoutDiscountsInput!
+}
+
+input UserUpsertWithoutTransactionsInput {
+  update: UserUpdateWithoutTransactionsDataInput!
+  create: UserCreateWithoutTransactionsInput!
+}
+
 enum UserType {
   RESIDENTIAL
   COMMERCIAL
@@ -862,11 +1158,305 @@ type Transaction {
   updatedAt: DateTime!
 }
 
+input TransactionCreateInput {
+  id: ID
+  type: TransactionType
+  status: TransactionStatus
+  items: ItemCreateManyInput
+  payment: PaymentCreateOneInput!
+  user: UserCreateOneWithoutTransactionsInput!
+}
+
+input TransactionCreateManyWithoutUserInput {
+  create: [TransactionCreateWithoutUserInput!]
+  connect: [TransactionWhereUniqueInput!]
+}
+
+input TransactionCreateWithoutUserInput {
+  id: ID
+  type: TransactionType
+  status: TransactionStatus
+  items: ItemCreateManyInput
+  payment: PaymentCreateOneInput!
+}
+
+input TransactionUpdateInput {
+  type: TransactionType
+  status: TransactionStatus
+  items: ItemUpdateManyInput
+  payment: PaymentUpdateOneRequiredInput
+  user: UserUpdateOneRequiredWithoutTransactionsInput
+}
+
+input TransactionUpdateManyDataInput {
+  type: TransactionType
+  status: TransactionStatus
+}
+
+input TransactionUpdateManyMutationInput {
+  type: TransactionType
+  status: TransactionStatus
+}
+
+input TransactionUpdateManyWithoutUserInput {
+  create: [TransactionCreateWithoutUserInput!]
+  connect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
+  disconnect: [TransactionWhereUniqueInput!]
+  delete: [TransactionWhereUniqueInput!]
+  update: [TransactionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [TransactionScalarWhereInput!]
+  upsert: [TransactionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TransactionUpdateManyWithWhereNestedInput {
+  where: TransactionScalarWhereInput!
+  data: TransactionUpdateManyDataInput!
+}
+
+input TransactionUpdateWithoutUserDataInput {
+  type: TransactionType
+  status: TransactionStatus
+  items: ItemUpdateManyInput
+  payment: PaymentUpdateOneRequiredInput
+}
+
+input TransactionUpdateWithWhereUniqueWithoutUserInput {
+  where: TransactionWhereUniqueInput!
+  data: TransactionUpdateWithoutUserDataInput!
+}
+
+input TransactionUpsertWithWhereUniqueWithoutUserInput {
+  where: TransactionWhereUniqueInput!
+  update: TransactionUpdateWithoutUserDataInput!
+  create: TransactionCreateWithoutUserInput!
+}
+
+input ItemCreateInput {
+  id: ID
+  quantity: Int!
+  discount: Float
+  total: Int!
+  product: ProductCreateOneInput!
+}
+
+input ItemCreateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+}
+
+input PaymentCreateInput {
+  id: ID
+  paid: Int!
+  balance: Int!
+  method: PaymentMethod
+  status: PaymentStatus
+}
+
+input PaymentCreateOneInput {
+  create: PaymentCreateInput
+  connect: PaymentWhereUniqueInput
+}
+
+input PaymentUpdateDataInput {
+  paid: Int
+  balance: Int
+  method: PaymentMethod
+  status: PaymentStatus
+}
+
+input PaymentUpdateInput {
+  paid: Int
+  balance: Int
+  method: PaymentMethod
+  status: PaymentStatus
+}
+
+input PaymentUpdateManyMutationInput {
+  paid: Int
+  balance: Int
+  method: PaymentMethod
+  status: PaymentStatus
+}
+
+input PaymentUpdateOneRequiredInput {
+  create: PaymentCreateInput
+  connect: PaymentWhereUniqueInput
+  update: PaymentUpdateDataInput
+  upsert: PaymentUpsertNestedInput
+}
+
+input PaymentUpsertNestedInput {
+  update: PaymentUpdateDataInput!
+  create: PaymentCreateInput!
+}
+
+input BottleTransactionScalarWhereInput {
+  #Logical AND on all given filters.#
+  AND: [BottleTransactionScalarWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [BottleTransactionScalarWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [BottleTransactionScalarWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  in: Int
+
+  #All values that are not equal to given value.#
+  in_not: Int
+
+  #All values that are contained in given list.#
+  in_in: [Int!]
+
+  #All values that are not contained in given list.#
+  in_not_in: [Int!]
+
+  #All values less than the given value.#
+  in_lt: Int
+
+  #All values less than or equal the given value.#
+  in_lte: Int
+
+  #All values greater than the given value.#
+  in_gt: Int
+
+  #All values greater than or equal the given value.#
+  in_gte: Int
+  out: Int
+
+  #All values that are not equal to given value.#
+  out_not: Int
+
+  #All values that are contained in given list.#
+  out_in: [Int!]
+
+  #All values that are not contained in given list.#
+  out_not_in: [Int!]
+
+  #All values less than the given value.#
+  out_lt: Int
+
+  #All values less than or equal the given value.#
+  out_lte: Int
+
+  #All values greater than the given value.#
+  out_gt: Int
+
+  #All values greater than or equal the given value.#
+  out_gte: Int
+  createdAt: DateTime
+
+  #All values that are not equal to given value.#
+  createdAt_not: DateTime
+
+  #All values that are contained in given list.#
+  createdAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  createdAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  createdAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  createdAt_lte: DateTime
+
+  #All values greater than the given value.#
+  createdAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  #All values that are not equal to given value.#
+  updatedAt_not: DateTime
+
+  #All values that are contained in given list.#
+  updatedAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  updatedAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  updatedAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  updatedAt_lte: DateTime
+
+  #All values greater than the given value.#
+  updatedAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  updatedAt_gte: DateTime
+}
 
 type Bottle {
   id: ID!
   balance: Int!
   bottleTransactions: [BottleTransaction]
+}
+
+input BottleTransactionCreateInput {
+  id: ID
+  in: Int
+  out: Int
+  bottle: BottleCreateOneWithoutBottleTransactionsInput!
+}
+
+input BottleTransactionCreateManyWithoutBottleInput {
+  create: [BottleTransactionCreateWithoutBottleInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+}
+
+input BottleTransactionCreateWithoutBottleInput {
+  id: ID
+  in: Int
+  out: Int
+}
+
+input BottleWhereUniqueInput {
+  id: ID
 }
 
 type BottleTransaction {
@@ -877,12 +1467,185 @@ type BottleTransaction {
   updatedAt: DateTime!
 }
 
+input BottleCreateInput {
+  id: ID
+  balance: Int
+  bottleTransactions: BottleTransactionCreateManyWithoutBottleInput
+}
+
+input BottleCreateOneInput {
+  create: BottleCreateInput
+  connect: BottleWhereUniqueInput
+}
+
+input BottleCreateOneWithoutBottleTransactionsInput {
+  create: BottleCreateWithoutBottleTransactionsInput
+  connect: BottleWhereUniqueInput
+}
+
+input BottleCreateWithoutBottleTransactionsInput {
+  id: ID
+  balance: Int
+}
+
+input BottleTransactionWhereUniqueInput {
+  id: ID
+}
+
+input BottleUpdateDataInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyWithoutBottleInput
+}
+
+input BottleUpdateInput {
+  balance: Int
+  bottleTransactions: BottleTransactionUpdateManyWithoutBottleInput
+}
+
+input BottleUpdateManyMutationInput {
+  balance: Int
+}
+
+input BottleUpdateOneInput {
+  create: BottleCreateInput
+  connect: BottleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: BottleUpdateDataInput
+  upsert: BottleUpsertNestedInput
+}
+
+input BottleUpdateOneRequiredWithoutBottleTransactionsInput {
+  create: BottleCreateWithoutBottleTransactionsInput
+  connect: BottleWhereUniqueInput
+  update: BottleUpdateWithoutBottleTransactionsDataInput
+  upsert: BottleUpsertWithoutBottleTransactionsInput
+}
+
+input BottleUpdateWithoutBottleTransactionsDataInput {
+  balance: Int
+}
+
+input BottleUpsertNestedInput {
+  update: BottleUpdateDataInput!
+  create: BottleCreateInput!
+}
+
+input BottleUpsertWithoutBottleTransactionsInput {
+  update: BottleUpdateWithoutBottleTransactionsDataInput!
+  create: BottleCreateWithoutBottleTransactionsInput!
+}
+
+input BottleTransactionUpdateInput {
+  in: Int
+  out: Int
+  bottle: BottleUpdateOneRequiredWithoutBottleTransactionsInput
+}
+
+input BottleTransactionUpdateManyDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyMutationInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateManyWithoutBottleInput {
+  create: [BottleTransactionCreateWithoutBottleInput!]
+  connect: [BottleTransactionWhereUniqueInput!]
+  set: [BottleTransactionWhereUniqueInput!]
+  disconnect: [BottleTransactionWhereUniqueInput!]
+  delete: [BottleTransactionWhereUniqueInput!]
+  update: [BottleTransactionUpdateWithWhereUniqueWithoutBottleInput!]
+  updateMany: [BottleTransactionUpdateManyWithWhereNestedInput!]
+  deleteMany: [BottleTransactionScalarWhereInput!]
+  upsert: [BottleTransactionUpsertWithWhereUniqueWithoutBottleInput!]
+}
+
+input BottleTransactionUpdateManyWithWhereNestedInput {
+  where: BottleTransactionScalarWhereInput!
+  data: BottleTransactionUpdateManyDataInput!
+}
+
+input BottleTransactionUpdateWithoutBottleDataInput {
+  in: Int
+  out: Int
+}
+
+input BottleTransactionUpdateWithWhereUniqueWithoutBottleInput {
+  where: BottleTransactionWhereUniqueInput!
+  data: BottleTransactionUpdateWithoutBottleDataInput!
+}
+
+input BottleTransactionUpsertWithWhereUniqueWithoutBottleInput {
+  where: BottleTransactionWhereUniqueInput!
+  update: BottleTransactionUpdateWithoutBottleDataInput!
+  create: BottleTransactionCreateWithoutBottleInput!
+}
+
+
 type Item {
   id: ID!
   product: Product!
   quantity: Int!
   discount: Float!
   total: Int!
+}
+
+input ItemUpdateDataInput {
+  quantity: Int
+  discount: Float
+  total: Int
+  product: ProductUpdateOneRequiredInput
+}
+
+input ItemUpdateInput {
+  quantity: Int
+  discount: Float
+  total: Int
+  product: ProductUpdateOneRequiredInput
+}
+
+input ItemUpdateManyDataInput {
+  quantity: Int
+  discount: Float
+  total: Int
+}
+
+input ItemUpdateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueNestedInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
+}
+
+input ItemUpdateManyMutationInput {
+  quantity: Int
+  discount: Float
+  total: Int
+}
+
+input ItemUpdateManyWithWhereNestedInput {
+  where: ItemScalarWhereInput!
+  data: ItemUpdateManyDataInput!
+}
+
+input ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateDataInput!
+}
+
+input ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateDataInput!
+  create: ItemCreateInput!
 }
 
 enum TransactionType {
@@ -895,6 +1658,122 @@ enum TransactionStatus {
   PROCESSING,
   COMPLETED
 }
+
+input TransactionScalarWhereInput {
+  #Logical AND on all given filters.#
+  AND: [TransactionScalarWhereInput!]
+
+  #Logical OR on all given filters.#
+  OR: [TransactionScalarWhereInput!]
+
+  #Logical NOT on all given filters combined by AND.#
+  NOT: [TransactionScalarWhereInput!]
+  id: ID
+
+  #All values that are not equal to given value.#
+  id_not: ID
+
+  #All values that are contained in given list.#
+  id_in: [ID!]
+
+  #All values that are not contained in given list.#
+  id_not_in: [ID!]
+
+  #All values less than the given value.#
+  id_lt: ID
+
+  #All values less than or equal the given value.#
+  id_lte: ID
+
+  #All values greater than the given value.#
+  id_gt: ID
+
+  #All values greater than or equal the given value.#
+  id_gte: ID
+
+  #All values containing the given string.#
+  id_contains: ID
+
+  #All values not containing the given string.#
+  id_not_contains: ID
+
+  #All values starting with the given string.#
+  id_starts_with: ID
+
+  #All values not starting with the given string.#
+  id_not_starts_with: ID
+
+  #All values ending with the given string.#
+  id_ends_with: ID
+
+  #All values not ending with the given string.#
+  id_not_ends_with: ID
+  type: TransactionType
+
+  #All values that are not equal to given value.#
+  type_not: TransactionType
+
+  #All values that are contained in given list.#
+  type_in: [TransactionType!]
+
+  #All values that are not contained in given list.#
+  type_not_in: [TransactionType!]
+  status: TransactionStatus
+
+  #All values that are not equal to given value.#
+  status_not: TransactionStatus
+
+  #All values that are contained in given list.#
+  status_in: [TransactionStatus!]
+
+  #All values that are not contained in given list.#
+  status_not_in: [TransactionStatus!]
+  createdAt: DateTime
+
+  #All values that are not equal to given value.#
+  createdAt_not: DateTime
+
+  #All values that are contained in given list.#
+  createdAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  createdAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  createdAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  createdAt_lte: DateTime
+
+  #All values greater than the given value.#
+  createdAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  #All values that are not equal to given value.#
+  updatedAt_not: DateTime
+
+  #All values that are contained in given list.#
+  updatedAt_in: [DateTime!]
+
+  #All values that are not contained in given list.#
+  updatedAt_not_in: [DateTime!]
+
+  #All values less than the given value.#
+  updatedAt_lt: DateTime
+
+  #All values less than or equal the given value.#
+  updatedAt_lte: DateTime
+
+  #All values greater than the given value.#
+  updatedAt_gt: DateTime
+
+  #All values greater than or equal the given value.#
+  updatedAt_gte: DateTime
+}
+
 
 type Payment {
   id: ID!
