@@ -146,6 +146,10 @@ input TransactionWhereInput {
   user: UserWhereInput
 }
 
+input TransactionWhereUniqueInput {
+  id: ID
+}
+
 input ItemWhereInput {
   #Logical AND on all given filters.#
   AND: [ItemWhereInput!]
@@ -550,6 +554,7 @@ type Query {
   products(where: ProductWhereInput): [Product]
   customer(where: UserWhereUniqueInput): User
   transactions(where: TransactionWhereInput): [Transaction]
+  transaction(where: TransactionWhereUniqueInput!): Transaction
 }
 
 input LocationWhereUniqueInput {

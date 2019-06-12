@@ -12,7 +12,7 @@ const Query = {
     })
   },
   customer(parent, args, { prisma }) {
-    return prisma.user({id:args.where.id})
+    return prisma.user({id: args.where.id})
   },
   transactions(parent, args, { prisma }) {
     return prisma.transactions({
@@ -20,6 +20,9 @@ const Query = {
         ...args.where
       }
     })
+  },
+  transaction(parent, args, { prisma }) {
+    return prisma.transaction({id: args.where.id})
   },
   products(parent, args, { prisma }) {
     return prisma.products({

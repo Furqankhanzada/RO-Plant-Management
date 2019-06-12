@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   name: String
   mobile: String! @unique
   password: String!
@@ -25,7 +25,7 @@ enum Role {
 }
 
 type Address {
-  id: ID! @unique
+  id: ID! @id
   town: String
   area: String
   block: String
@@ -34,13 +34,13 @@ type Address {
 }
 
 type Location {
-  id: ID! @unique
+  id: ID! @id
   latitude: Float!
   longitude: Float!
 }
 
 type Product {
-  id: ID! @unique
+  id: ID! @id
   name: String!
   price: Int!
   createdAt: DateTime! @createdAt
@@ -48,7 +48,7 @@ type Product {
 }
 
 type Discount {
-  id: ID! @unique
+  id: ID! @id
   product: Product!
   discount: Float! @default(value: 0)
   user: User! @relation(name: "DiscountsByUser")
@@ -57,7 +57,7 @@ type Discount {
 }
 
 type Transaction {
-  id: ID! @unique
+  id: ID! @id
   type: TransactionType! @default(value: SELL)
   status: TransactionStatus! @default(value: PENDING)
   items: [Item!]! @relation(name: "ItemsByTransactions" onDelete: CASCADE)
@@ -69,13 +69,13 @@ type Transaction {
 
 
 type Bottle {
-  id: ID! @unique
+  id: ID! @id
   balance: Int! @default(value: 0)
   bottleTransactions: [BottleTransaction] @relation(name: "BottleTransactions" onDelete: CASCADE)
 }
 
 type BottleTransaction {
-  id: ID! @unique
+  id: ID! @id
   bottle: Bottle! @relation(name: "BottleTransactions")
   in: Int! @default(value: 0)
   out: Int! @default(value: 0)
@@ -84,7 +84,7 @@ type BottleTransaction {
 }
 
 type Item {
-  id: ID! @unique
+  id: ID! @id
   product: Product!
   quantity: Int!
   discount: Float! @default(value: 0)
@@ -103,7 +103,7 @@ enum TransactionStatus {
 }
 
 type Payment {
-  id: ID! @unique
+  id: ID! @id
   paid: Int!
   balance: Int!
   method: PaymentMethod! @default(value: CASH)
