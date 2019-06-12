@@ -883,19 +883,6 @@ type Mutation {
   createProduct(data: ProductCreateInput!): User!
 }
 
-
-input UserUpdateInput {
- name: String
-  mobile: String
-  password: String
-  type: UserType
-  role: Role
-  address: AddressUpdateOneInput
-  discounts: DiscountUpdateManyWithoutUserInput
-#  transactions: TransactionCreateManyWithoutUserInput
-#  bottle: BottleCreateOneInput
-}
-
 input DiscountUpdateManyWithoutUserInput {
   create: [DiscountCreateWithoutUserInput!]
   delete: [DiscountWhereUniqueInput!]
@@ -1231,19 +1218,6 @@ input TransactionUpsertWithWhereUniqueWithoutUserInput {
   where: TransactionWhereUniqueInput!
   update: TransactionUpdateWithoutUserDataInput!
   create: TransactionCreateWithoutUserInput!
-}
-
-input ItemCreateInput {
-  id: ID
-  quantity: Int!
-  discount: Float
-  total: Int!
-  product: ProductCreateOneInput!
-}
-
-input ItemCreateManyInput {
-  create: [ItemCreateInput!]
-  connect: [ItemWhereUniqueInput!]
 }
 
 input PaymentCreateInput {
@@ -1592,60 +1566,6 @@ type Item {
   quantity: Int!
   discount: Float!
   total: Int!
-}
-
-input ItemUpdateDataInput {
-  quantity: Int
-  discount: Float
-  total: Int
-  product: ProductUpdateOneRequiredInput
-}
-
-input ItemUpdateInput {
-  quantity: Int
-  discount: Float
-  total: Int
-  product: ProductUpdateOneRequiredInput
-}
-
-input ItemUpdateManyDataInput {
-  quantity: Int
-  discount: Float
-  total: Int
-}
-
-input ItemUpdateManyInput {
-  create: [ItemCreateInput!]
-  connect: [ItemWhereUniqueInput!]
-  set: [ItemWhereUniqueInput!]
-  disconnect: [ItemWhereUniqueInput!]
-  delete: [ItemWhereUniqueInput!]
-  update: [ItemUpdateWithWhereUniqueNestedInput!]
-  updateMany: [ItemUpdateManyWithWhereNestedInput!]
-  deleteMany: [ItemScalarWhereInput!]
-  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
-}
-
-input ItemUpdateManyMutationInput {
-  quantity: Int
-  discount: Float
-  total: Int
-}
-
-input ItemUpdateManyWithWhereNestedInput {
-  where: ItemScalarWhereInput!
-  data: ItemUpdateManyDataInput!
-}
-
-input ItemUpdateWithWhereUniqueNestedInput {
-  where: ItemWhereUniqueInput!
-  data: ItemUpdateDataInput!
-}
-
-input ItemUpsertWithWhereUniqueNestedInput {
-  where: ItemWhereUniqueInput!
-  update: ItemUpdateDataInput!
-  create: ItemCreateInput!
 }
 
 enum TransactionType {
