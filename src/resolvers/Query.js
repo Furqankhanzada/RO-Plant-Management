@@ -3,13 +3,18 @@ const Query = {
   me(parent, { where = {} }, { user: { id }, prisma }) {
     return prisma.user({ id })
   },
-  customers(parent, args, { prisma }) {
-    return prisma.users({
-      where: {
-        ...args.where,
+  customers(parent, { where, first }, { prisma }) {
+    let query =  {};
+    if(where) {
+      query.where = {
+        ...where,
         role: 'CUSTOMER'
       }
-    })
+    }
+    if(first) {
+      query.first = first
+    }
+    return prisma.users(query)
   },
   customer(parent, args, { prisma }) {
     return prisma.user({id: args.where.id})
