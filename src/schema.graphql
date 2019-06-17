@@ -876,7 +876,7 @@ type Mutation {
   login(mobile: String!, password: String!): AuthPayload!
   createCustomer(data: UserCreateInput!): User!
   updateCustomer(data: UserUpdateInput!, id: ID): User!
-  updateTransaction(data: TransactionUpdateInput!, id: ID): Transaction!
+  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   createTransaction(data: TransactionCreateInput!): Transaction!
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteCustomer(where: UserWhereUniqueInput!): User

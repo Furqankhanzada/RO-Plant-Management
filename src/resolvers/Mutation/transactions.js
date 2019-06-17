@@ -7,7 +7,7 @@ const transactions = {
     return await context.prisma.updateTransaction({
       data: args.data,
       where: {
-        id: args.id
+        ...args.where
       }
     });
   },
