@@ -26,6 +26,12 @@ input UserWhereInput {
   transactions_none: TransactionWhereInput
 }
 
+enum LinkOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+}
+
+
 input TransactionWhereInput {
   #Logical AND on all given filters.#
   AND: [TransactionWhereInput!]
@@ -765,7 +771,7 @@ type Query {
   customers(where: UserWhereInput, first: Int): [User]
   products(where: ProductWhereInput): [Product]
   customer(where: UserWhereUniqueInput): User
-  transactions(where: TransactionWhereInput): [Transaction]
+  transactions(where: TransactionWhereInput, orderBy: LinkOrderByInput): [Transaction]
   transaction(where: TransactionWhereUniqueInput!): Transaction
 }
 
@@ -986,7 +992,8 @@ input AddressUpsertNestedInput {
 
 
 type Subscription {
-  userSubscription: User
+  userSubscription: User,
+  transactionSubscription: Transaction
 }
 
 type AuthPayload {

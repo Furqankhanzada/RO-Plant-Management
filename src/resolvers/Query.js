@@ -22,8 +22,9 @@ const Query = {
   transactions(parent, args, { prisma }) {
     return prisma.transactions({
       where: {
-        ...args.where
-      }
+        ...args.where 
+      },
+      orderBy: "createdAt_DESC" 
     })
   },
   transaction(parent, args, { prisma }) {
