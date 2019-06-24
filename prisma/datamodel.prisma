@@ -1,7 +1,7 @@
 type User {
   id: ID! @id
   name: String
-  mobile: String! @unique
+  mobile: String! @id
   password: String!
   type: UserType @default(value: RESIDENTIAL)
   role: Role! @default(value: CUSTOMER)
@@ -89,6 +89,8 @@ type Item {
   quantity: Int!
   discount: Float! @default(value: 0)
   total: Int!
+  transactionAt: DateTime!
+  bottleOut: Int
 }
 
 enum TransactionType {

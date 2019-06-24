@@ -421,6 +421,8 @@ input ItemCreateInput {
   discount: Float
   total: Int!
   product: ProductCreateOneInput!
+  transactionAt: DateTime
+  bottleOut: Int
 }
 
 input ItemCreateManyInput {
@@ -1573,6 +1575,8 @@ type Item {
   quantity: Int!
   discount: Float!
   total: Int!
+  transactionAt: DateTime!
+  bottleOut: Int
 }
 
 enum TransactionType {
