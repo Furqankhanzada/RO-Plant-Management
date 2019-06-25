@@ -886,8 +886,8 @@ type Mutation {
   login(mobile: String!, password: String!): AuthPayload!
   createCustomer(data: UserCreateInput!): User!
   updateCustomer(data: UserUpdateInput!, id: ID): User!
-  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
-  createTransaction(data: TransactionCreateInput!): Transaction!
+  updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!, userID: ID, bottleBalance: Int): Transaction
+  createTransaction(data: TransactionCreateInput!, bottleBalance: Int): Transaction!
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteCustomer(where: UserWhereUniqueInput!): User
   createProduct(data: ProductCreateInput!): User!
