@@ -1,7 +1,7 @@
 type User {
   id: ID! @id
   name: String
-  mobile: String! @id
+  mobile: String! @unique
   password: String!
   type: UserType @default(value: RESIDENTIAL)
   role: Role! @default(value: CUSTOMER)
