@@ -1,5 +1,5 @@
-# source: https://ro-plant-d678feb064.herokuapp.com/ro-plant-backend/dev
-# timestamp: Mon Jun 24 2019 13:12:35 GMT+0500 (Pakistan Standard Time)
+# source: https://ro-production-7c360817d7.herokuapp.com/ro/prod
+# timestamp: Wed Jun 26 2019 23:49:27 GMT+0500 (PKT)
 
 type Address implements Node {
   id: ID!
@@ -21,6 +21,7 @@ type AddressConnection {
 }
 
 input AddressCreateInput {
+  id: ID
   town: String
   area: String
   block: String
@@ -53,10 +54,6 @@ enum AddressOrderByInput {
   block_DESC
   house_ASC
   house_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type AddressPreviousValues {
@@ -419,6 +416,7 @@ type BottleConnection {
 }
 
 input BottleCreateInput {
+  id: ID
   balance: Int
   bottleTransactions: BottleTransactionCreateManyWithoutBottleInput
 }
@@ -434,6 +432,7 @@ input BottleCreateOneWithoutBottleTransactionsInput {
 }
 
 input BottleCreateWithoutBottleTransactionsInput {
+  id: ID
   balance: Int
 }
 
@@ -451,10 +450,6 @@ enum BottleOrderByInput {
   id_DESC
   balance_ASC
   balance_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type BottlePreviousValues {
@@ -519,6 +514,7 @@ type BottleTransactionConnection {
 }
 
 input BottleTransactionCreateInput {
+  id: ID
   in: Int
   out: Int
   bottle: BottleCreateOneWithoutBottleTransactionsInput!
@@ -530,6 +526,7 @@ input BottleTransactionCreateManyWithoutBottleInput {
 }
 
 input BottleTransactionCreateWithoutBottleInput {
+  id: ID
   in: Int
   out: Int
 }
@@ -759,6 +756,7 @@ input BottleTransactionUpdateManyMutationInput {
 input BottleTransactionUpdateManyWithoutBottleInput {
   create: [BottleTransactionCreateWithoutBottleInput!]
   connect: [BottleTransactionWhereUniqueInput!]
+  set: [BottleTransactionWhereUniqueInput!]
   disconnect: [BottleTransactionWhereUniqueInput!]
   delete: [BottleTransactionWhereUniqueInput!]
   update: [BottleTransactionUpdateWithWhereUniqueWithoutBottleInput!]
@@ -1078,6 +1076,7 @@ type DiscountConnection {
 }
 
 input DiscountCreateInput {
+  id: ID
   discount: Float
   product: ProductCreateOneInput!
   user: UserCreateOneWithoutDiscountsInput!
@@ -1089,6 +1088,7 @@ input DiscountCreateManyWithoutUserInput {
 }
 
 input DiscountCreateWithoutUserInput {
+  id: ID
   discount: Float
   product: ProductCreateOneInput!
 }
@@ -1291,6 +1291,7 @@ input DiscountUpdateManyMutationInput {
 input DiscountUpdateManyWithoutUserInput {
   create: [DiscountCreateWithoutUserInput!]
   connect: [DiscountWhereUniqueInput!]
+  set: [DiscountWhereUniqueInput!]
   disconnect: [DiscountWhereUniqueInput!]
   delete: [DiscountWhereUniqueInput!]
   update: [DiscountUpdateWithWhereUniqueWithoutUserInput!]
@@ -1464,6 +1465,7 @@ type ItemConnection {
 }
 
 input ItemCreateInput {
+  id: ID
   quantity: Int!
   discount: Float
   total: Int!
@@ -1499,10 +1501,6 @@ enum ItemOrderByInput {
   transactionAt_DESC
   bottleOut_ASC
   bottleOut_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type ItemPreviousValues {
@@ -1741,6 +1739,7 @@ input ItemUpdateManyDataInput {
 input ItemUpdateManyInput {
   create: [ItemCreateInput!]
   connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
   disconnect: [ItemWhereUniqueInput!]
   delete: [ItemWhereUniqueInput!]
   update: [ItemUpdateWithWhereUniqueNestedInput!]
@@ -1956,6 +1955,7 @@ type LocationConnection {
 }
 
 input LocationCreateInput {
+  id: ID
   latitude: Float!
   longitude: Float!
 }
@@ -1981,10 +1981,6 @@ enum LocationOrderByInput {
   latitude_DESC
   longitude_ASC
   longitude_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type LocationPreviousValues {
@@ -2169,62 +2165,62 @@ type Mutation {
   createDiscount(data: DiscountCreateInput!): Discount!
   createTransaction(data: TransactionCreateInput!): Transaction!
   createBottleTransaction(data: BottleTransactionCreateInput!): BottleTransaction!
-  createPayment(data: PaymentCreateInput!): Payment!
-  createBottle(data: BottleCreateInput!): Bottle!
-  createLocation(data: LocationCreateInput!): Location!
-  createItem(data: ItemCreateInput!): Item!
   createAddress(data: AddressCreateInput!): Address!
+  createBottle(data: BottleCreateInput!): Bottle!
+  createPayment(data: PaymentCreateInput!): Payment!
+  createLocation(data: LocationCreateInput!): Location!
   createProduct(data: ProductCreateInput!): Product!
+  createItem(data: ItemCreateInput!): Item!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateDiscount(data: DiscountUpdateInput!, where: DiscountWhereUniqueInput!): Discount
   updateTransaction(data: TransactionUpdateInput!, where: TransactionWhereUniqueInput!): Transaction
   updateBottleTransaction(data: BottleTransactionUpdateInput!, where: BottleTransactionWhereUniqueInput!): BottleTransaction
-  updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment
-  updateBottle(data: BottleUpdateInput!, where: BottleWhereUniqueInput!): Bottle
-  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
-  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateAddress(data: AddressUpdateInput!, where: AddressWhereUniqueInput!): Address
+  updateBottle(data: BottleUpdateInput!, where: BottleWhereUniqueInput!): Bottle
+  updatePayment(data: PaymentUpdateInput!, where: PaymentWhereUniqueInput!): Payment
+  updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   deleteUser(where: UserWhereUniqueInput!): User
   deleteDiscount(where: DiscountWhereUniqueInput!): Discount
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteBottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
-  deletePayment(where: PaymentWhereUniqueInput!): Payment
-  deleteBottle(where: BottleWhereUniqueInput!): Bottle
-  deleteLocation(where: LocationWhereUniqueInput!): Location
-  deleteItem(where: ItemWhereUniqueInput!): Item
   deleteAddress(where: AddressWhereUniqueInput!): Address
+  deleteBottle(where: BottleWhereUniqueInput!): Bottle
+  deletePayment(where: PaymentWhereUniqueInput!): Payment
+  deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteItem(where: ItemWhereUniqueInput!): Item
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertDiscount(where: DiscountWhereUniqueInput!, create: DiscountCreateInput!, update: DiscountUpdateInput!): Discount!
   upsertTransaction(where: TransactionWhereUniqueInput!, create: TransactionCreateInput!, update: TransactionUpdateInput!): Transaction!
   upsertBottleTransaction(where: BottleTransactionWhereUniqueInput!, create: BottleTransactionCreateInput!, update: BottleTransactionUpdateInput!): BottleTransaction!
-  upsertPayment(where: PaymentWhereUniqueInput!, create: PaymentCreateInput!, update: PaymentUpdateInput!): Payment!
-  upsertBottle(where: BottleWhereUniqueInput!, create: BottleCreateInput!, update: BottleUpdateInput!): Bottle!
-  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
-  upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertAddress(where: AddressWhereUniqueInput!, create: AddressCreateInput!, update: AddressUpdateInput!): Address!
+  upsertBottle(where: BottleWhereUniqueInput!, create: BottleCreateInput!, update: BottleUpdateInput!): Bottle!
+  upsertPayment(where: PaymentWhereUniqueInput!, create: PaymentCreateInput!, update: PaymentUpdateInput!): Payment!
+  upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyDiscounts(data: DiscountUpdateManyMutationInput!, where: DiscountWhereInput): BatchPayload!
   updateManyTransactions(data: TransactionUpdateManyMutationInput!, where: TransactionWhereInput): BatchPayload!
   updateManyBottleTransactions(data: BottleTransactionUpdateManyMutationInput!, where: BottleTransactionWhereInput): BatchPayload!
-  updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
-  updateManyBottles(data: BottleUpdateManyMutationInput!, where: BottleWhereInput): BatchPayload!
-  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
-  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   updateManyAddresses(data: AddressUpdateManyMutationInput!, where: AddressWhereInput): BatchPayload!
+  updateManyBottles(data: BottleUpdateManyMutationInput!, where: BottleWhereInput): BatchPayload!
+  updateManyPayments(data: PaymentUpdateManyMutationInput!, where: PaymentWhereInput): BatchPayload!
+  updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
   updateManyProducts(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload!
+  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyDiscounts(where: DiscountWhereInput): BatchPayload!
   deleteManyTransactions(where: TransactionWhereInput): BatchPayload!
   deleteManyBottleTransactions(where: BottleTransactionWhereInput): BatchPayload!
-  deleteManyPayments(where: PaymentWhereInput): BatchPayload!
-  deleteManyBottles(where: BottleWhereInput): BatchPayload!
-  deleteManyLocations(where: LocationWhereInput): BatchPayload!
-  deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyAddresses(where: AddressWhereInput): BatchPayload!
+  deleteManyBottles(where: BottleWhereInput): BatchPayload!
+  deleteManyPayments(where: PaymentWhereInput): BatchPayload!
+  deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
+  deleteManyItems(where: ItemWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -2275,6 +2271,7 @@ type PaymentConnection {
 }
 
 input PaymentCreateInput {
+  id: ID
   paid: Int!
   balance: Int!
   method: PaymentMethod
@@ -2585,6 +2582,7 @@ type ProductConnection {
 }
 
 input ProductCreateInput {
+  id: ID
   name: String!
   price: Int!
 }
@@ -2854,32 +2852,32 @@ type Query {
   discounts(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Discount]!
   transactions(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction]!
   bottleTransactions(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BottleTransaction]!
-  payments(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Payment]!
-  bottles(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bottle]!
-  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
-  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   addresses(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Address]!
+  bottles(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bottle]!
+  payments(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Payment]!
+  locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   user(where: UserWhereUniqueInput!): User
   discount(where: DiscountWhereUniqueInput!): Discount
   transaction(where: TransactionWhereUniqueInput!): Transaction
   bottleTransaction(where: BottleTransactionWhereUniqueInput!): BottleTransaction
-  payment(where: PaymentWhereUniqueInput!): Payment
-  bottle(where: BottleWhereUniqueInput!): Bottle
-  location(where: LocationWhereUniqueInput!): Location
-  item(where: ItemWhereUniqueInput!): Item
   address(where: AddressWhereUniqueInput!): Address
+  bottle(where: BottleWhereUniqueInput!): Bottle
+  payment(where: PaymentWhereUniqueInput!): Payment
+  location(where: LocationWhereUniqueInput!): Location
   product(where: ProductWhereUniqueInput!): Product
+  item(where: ItemWhereUniqueInput!): Item
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   discountsConnection(where: DiscountWhereInput, orderBy: DiscountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DiscountConnection!
   transactionsConnection(where: TransactionWhereInput, orderBy: TransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TransactionConnection!
   bottleTransactionsConnection(where: BottleTransactionWhereInput, orderBy: BottleTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleTransactionConnection!
-  paymentsConnection(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaymentConnection!
-  bottlesConnection(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleConnection!
-  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
-  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   addressesConnection(where: AddressWhereInput, orderBy: AddressOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AddressConnection!
+  bottlesConnection(where: BottleWhereInput, orderBy: BottleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BottleConnection!
+  paymentsConnection(where: PaymentWhereInput, orderBy: PaymentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PaymentConnection!
+  locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
+  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2899,12 +2897,12 @@ type Subscription {
   discount(where: DiscountSubscriptionWhereInput): DiscountSubscriptionPayload
   transaction(where: TransactionSubscriptionWhereInput): TransactionSubscriptionPayload
   bottleTransaction(where: BottleTransactionSubscriptionWhereInput): BottleTransactionSubscriptionPayload
-  payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
-  bottle(where: BottleSubscriptionWhereInput): BottleSubscriptionPayload
-  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
-  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   address(where: AddressSubscriptionWhereInput): AddressSubscriptionPayload
+  bottle(where: BottleSubscriptionWhereInput): BottleSubscriptionPayload
+  payment(where: PaymentSubscriptionWhereInput): PaymentSubscriptionPayload
+  location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   product(where: ProductSubscriptionWhereInput): ProductSubscriptionPayload
+  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
 }
 
 type Transaction implements Node {
@@ -2929,6 +2927,7 @@ type TransactionConnection {
 }
 
 input TransactionCreateInput {
+  id: ID
   type: TransactionType
   status: TransactionStatus
   items: ItemCreateManyInput
@@ -2942,6 +2941,7 @@ input TransactionCreateManyWithoutUserInput {
 }
 
 input TransactionCreateWithoutUserInput {
+  id: ID
   type: TransactionType
   status: TransactionStatus
   items: ItemCreateManyInput
@@ -3162,6 +3162,7 @@ input TransactionUpdateManyMutationInput {
 input TransactionUpdateManyWithoutUserInput {
   create: [TransactionCreateWithoutUserInput!]
   connect: [TransactionWhereUniqueInput!]
+  set: [TransactionWhereUniqueInput!]
   disconnect: [TransactionWhereUniqueInput!]
   delete: [TransactionWhereUniqueInput!]
   update: [TransactionUpdateWithWhereUniqueWithoutUserInput!]
@@ -3343,6 +3344,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   name: String
   mobile: String!
   password: String!
@@ -3365,6 +3367,7 @@ input UserCreateOneWithoutTransactionsInput {
 }
 
 input UserCreateWithoutDiscountsInput {
+  id: ID
   name: String
   mobile: String!
   password: String!
@@ -3376,6 +3379,7 @@ input UserCreateWithoutDiscountsInput {
 }
 
 input UserCreateWithoutTransactionsInput {
+  id: ID
   name: String
   mobile: String!
   password: String!
