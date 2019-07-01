@@ -8,7 +8,7 @@ type User {
   address: Address @relation(name: "UserAddress" onDelete: CASCADE)
   discounts: [Discount] @relation(name: "DiscountsByUser" onDelete: CASCADE)
   transactions: [Transaction] @relation(name: "TransactionsByUser" onDelete: CASCADE)
-  bottle: Bottle @relation(name: "Bottle" onDelete: CASCADE)
+  bottleBalance: Int! @default(value: 0)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -63,22 +63,6 @@ type Transaction {
   items: [Item!]! @relation(name: "ItemsByTransactions" onDelete: CASCADE)
   payment: Payment! @relation(name: "PaymentByTransactions" onDelete: CASCADE)
   user: User! @relation(name: "TransactionsByUser")
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
-
-
-type Bottle {
-  id: ID! @id
-  balance: Int! @default(value: 0)
-  bottleTransactions: [BottleTransaction] @relation(name: "BottleTransactions" onDelete: CASCADE)
-}
-
-type BottleTransaction {
-  id: ID! @id
-  bottle: Bottle! @relation(name: "BottleTransactions")
-  in: Int! @default(value: 0)
-  out: Int! @default(value: 0)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

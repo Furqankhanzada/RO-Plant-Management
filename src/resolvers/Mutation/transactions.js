@@ -5,11 +5,7 @@ const transactions = {
     const result = await context.prisma.createTransaction({ ...args.data })
     await context.prisma.updateUser({
       data: {
-        bottle: {
-          update: {
-            balance: args.bottleBalance
-          }
-        }
+        bottleBalance: args.bottleBalance
       },
       where: {
         id
@@ -26,8 +22,7 @@ const transactions = {
       const { items } = data;
       const { update } = items;
       const dbItems = await context.prisma.transaction({ id: id }).items();
-      const clientItems = update;
-      clientItems.map((value) => {
+      update.map((value) => {
         const { where, data } = value;
         const dbSingleItem = dbItems.find((value) => {
           return where.id === value.id
@@ -37,7 +32,7 @@ const transactions = {
         }
 
         if (data.bottleOut !== dbSingleItem.bottleOut) {
-            editedBalance = editedBalance - (data.bottleOut - dbSingleItem.bottleOut);
+          editedBalance = editedBalance - (data.bottleOut - dbSingleItem.bottleOut);
         }
       })
 
@@ -50,11 +45,7 @@ const transactions = {
     });
     await context.prisma.updateUser({
       data: {
-        bottle:{
-          update:{
-            balance: args.bottleBalance + editedBalance
-          }
-        }
+        bottleBalance: args.bottleBalance + editedBalance
       },
       where: {
         id: userID

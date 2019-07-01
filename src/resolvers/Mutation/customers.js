@@ -4,11 +4,6 @@ const customers = {
     async createCustomer(parent, args, context) {
         const password = await bcrypt.hash(args.data.password, 10);
         const role = 'CUSTOMER';
-        args.data.bottle = {
-            create: {
-                balance: 0
-            }
-        };
         return await context.prisma.createUser({ ...args.data, password, role });
     },
     async updateCustomer(parent, args, context) {

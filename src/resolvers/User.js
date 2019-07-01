@@ -14,9 +14,6 @@ const User = {
     }
     return context.prisma.user({ id }).transactions(query)
   },
-  bottle: ({ id }, args, context) => {
-    return context.prisma.user({ id }).bottle()
-  },
   discounts: ({ id }, args, context) => {
     return context.prisma.user({ id }).discounts()
   }

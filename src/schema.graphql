@@ -878,8 +878,7 @@ input UserCreateInput {
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
-#  transactions: TransactionCreateManyWithoutUserInput
-#  bottle: BottleCreateOneInput
+  bottleBalance: Int
 }
 
 type Mutation {
@@ -1014,7 +1013,7 @@ type User {
   address: Address
   discounts: [Discount]
   transactions(where: TransactionWhereInput, skip: Int, after: String, before: String, first: Int, last: Int): [Transaction!]
-  bottle: Bottle
+  bottleBalance: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1033,7 +1032,7 @@ input UserCreateWithoutTransactionsInput {
   role: Role
   address: AddressCreateOneInput
   discounts: DiscountCreateManyWithoutUserInput
-  bottle: BottleCreateOneInput
+  bottleBalance: Int
 }
 
 input UserUpdateInput {
@@ -1045,7 +1044,7 @@ input UserUpdateInput {
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
   transactions: TransactionUpdateManyWithoutUserInput
-  bottle: BottleUpdateOneInput
+  bottleBalance: Int
 }
 
 input UserUpdateManyMutationInput {
@@ -1078,7 +1077,7 @@ input UserUpdateWithoutDiscountsDataInput {
   role: Role
   address: AddressUpdateOneInput
   transactions: TransactionUpdateManyWithoutUserInput
-  bottle: BottleUpdateOneInput
+  bottleBalance: Int!
 }
 
 input UserUpdateWithoutTransactionsDataInput {
@@ -1089,7 +1088,7 @@ input UserUpdateWithoutTransactionsDataInput {
   role: Role
   address: AddressUpdateOneInput
   discounts: DiscountUpdateManyWithoutUserInput
-  bottle: BottleUpdateOneInput
+  bottleBalance: Int!
 }
 
 input UserUpsertWithoutDiscountsInput {
@@ -1276,300 +1275,6 @@ input PaymentUpsertNestedInput {
   update: PaymentUpdateDataInput!
   create: PaymentCreateInput!
 }
-
-input BottleTransactionScalarWhereInput {
-  #Logical AND on all given filters.#
-  AND: [BottleTransactionScalarWhereInput!]
-
-  #Logical OR on all given filters.#
-  OR: [BottleTransactionScalarWhereInput!]
-
-  #Logical NOT on all given filters combined by AND.#
-  NOT: [BottleTransactionScalarWhereInput!]
-  id: ID
-
-  #All values that are not equal to given value.#
-  id_not: ID
-
-  #All values that are contained in given list.#
-  id_in: [ID!]
-
-  #All values that are not contained in given list.#
-  id_not_in: [ID!]
-
-  #All values less than the given value.#
-  id_lt: ID
-
-  #All values less than or equal the given value.#
-  id_lte: ID
-
-  #All values greater than the given value.#
-  id_gt: ID
-
-  #All values greater than or equal the given value.#
-  id_gte: ID
-
-  #All values containing the given string.#
-  id_contains: ID
-
-  #All values not containing the given string.#
-  id_not_contains: ID
-
-  #All values starting with the given string.#
-  id_starts_with: ID
-
-  #All values not starting with the given string.#
-  id_not_starts_with: ID
-
-  #All values ending with the given string.#
-  id_ends_with: ID
-
-  #All values not ending with the given string.#
-  id_not_ends_with: ID
-  in: Int
-
-  #All values that are not equal to given value.#
-  in_not: Int
-
-  #All values that are contained in given list.#
-  in_in: [Int!]
-
-  #All values that are not contained in given list.#
-  in_not_in: [Int!]
-
-  #All values less than the given value.#
-  in_lt: Int
-
-  #All values less than or equal the given value.#
-  in_lte: Int
-
-  #All values greater than the given value.#
-  in_gt: Int
-
-  #All values greater than or equal the given value.#
-  in_gte: Int
-  out: Int
-
-  #All values that are not equal to given value.#
-  out_not: Int
-
-  #All values that are contained in given list.#
-  out_in: [Int!]
-
-  #All values that are not contained in given list.#
-  out_not_in: [Int!]
-
-  #All values less than the given value.#
-  out_lt: Int
-
-  #All values less than or equal the given value.#
-  out_lte: Int
-
-  #All values greater than the given value.#
-  out_gt: Int
-
-  #All values greater than or equal the given value.#
-  out_gte: Int
-  createdAt: DateTime
-
-  #All values that are not equal to given value.#
-  createdAt_not: DateTime
-
-  #All values that are contained in given list.#
-  createdAt_in: [DateTime!]
-
-  #All values that are not contained in given list.#
-  createdAt_not_in: [DateTime!]
-
-  #All values less than the given value.#
-  createdAt_lt: DateTime
-
-  #All values less than or equal the given value.#
-  createdAt_lte: DateTime
-
-  #All values greater than the given value.#
-  createdAt_gt: DateTime
-
-  #All values greater than or equal the given value.#
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  #All values that are not equal to given value.#
-  updatedAt_not: DateTime
-
-  #All values that are contained in given list.#
-  updatedAt_in: [DateTime!]
-
-  #All values that are not contained in given list.#
-  updatedAt_not_in: [DateTime!]
-
-  #All values less than the given value.#
-  updatedAt_lt: DateTime
-
-  #All values less than or equal the given value.#
-  updatedAt_lte: DateTime
-
-  #All values greater than the given value.#
-  updatedAt_gt: DateTime
-
-  #All values greater than or equal the given value.#
-  updatedAt_gte: DateTime
-}
-
-type Bottle {
-  id: ID!
-  balance: Int!
-  bottleTransactions: [BottleTransaction]
-}
-
-input BottleTransactionCreateInput {
-  id: ID
-  in: Int
-  out: Int
-  bottle: BottleCreateOneWithoutBottleTransactionsInput!
-}
-
-input BottleTransactionCreateManyWithoutBottleInput {
-  create: [BottleTransactionCreateWithoutBottleInput!]
-  connect: [BottleTransactionWhereUniqueInput!]
-}
-
-input BottleTransactionCreateWithoutBottleInput {
-  id: ID
-  in: Int
-  out: Int
-}
-
-input BottleWhereUniqueInput {
-  id: ID
-}
-
-type BottleTransaction {
-  id: ID!
-  in: Int!
-  out: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input BottleCreateInput {
-  id: ID
-  balance: Int
-  bottleTransactions: BottleTransactionCreateManyWithoutBottleInput
-}
-
-input BottleCreateOneInput {
-  create: BottleCreateInput
-  connect: BottleWhereUniqueInput
-}
-
-input BottleCreateOneWithoutBottleTransactionsInput {
-  create: BottleCreateWithoutBottleTransactionsInput
-  connect: BottleWhereUniqueInput
-}
-
-input BottleCreateWithoutBottleTransactionsInput {
-  id: ID
-  balance: Int
-}
-
-input BottleTransactionWhereUniqueInput {
-  id: ID
-}
-
-input BottleUpdateDataInput {
-  balance: Int
-  bottleTransactions: BottleTransactionUpdateManyWithoutBottleInput
-}
-
-input BottleUpdateInput {
-  balance: Int
-  bottleTransactions: BottleTransactionUpdateManyWithoutBottleInput
-}
-
-input BottleUpdateManyMutationInput {
-  balance: Int
-}
-
-input BottleUpdateOneInput {
-  create: BottleCreateInput
-  connect: BottleWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: BottleUpdateDataInput
-  upsert: BottleUpsertNestedInput
-}
-
-input BottleUpdateOneRequiredWithoutBottleTransactionsInput {
-  create: BottleCreateWithoutBottleTransactionsInput
-  connect: BottleWhereUniqueInput
-  update: BottleUpdateWithoutBottleTransactionsDataInput
-  upsert: BottleUpsertWithoutBottleTransactionsInput
-}
-
-input BottleUpdateWithoutBottleTransactionsDataInput {
-  balance: Int
-}
-
-input BottleUpsertNestedInput {
-  update: BottleUpdateDataInput!
-  create: BottleCreateInput!
-}
-
-input BottleUpsertWithoutBottleTransactionsInput {
-  update: BottleUpdateWithoutBottleTransactionsDataInput!
-  create: BottleCreateWithoutBottleTransactionsInput!
-}
-
-input BottleTransactionUpdateInput {
-  in: Int
-  out: Int
-  bottle: BottleUpdateOneRequiredWithoutBottleTransactionsInput
-}
-
-input BottleTransactionUpdateManyDataInput {
-  in: Int
-  out: Int
-}
-
-input BottleTransactionUpdateManyMutationInput {
-  in: Int
-  out: Int
-}
-
-input BottleTransactionUpdateManyWithoutBottleInput {
-  create: [BottleTransactionCreateWithoutBottleInput!]
-  connect: [BottleTransactionWhereUniqueInput!]
-  set: [BottleTransactionWhereUniqueInput!]
-  disconnect: [BottleTransactionWhereUniqueInput!]
-  delete: [BottleTransactionWhereUniqueInput!]
-  update: [BottleTransactionUpdateWithWhereUniqueWithoutBottleInput!]
-  updateMany: [BottleTransactionUpdateManyWithWhereNestedInput!]
-  deleteMany: [BottleTransactionScalarWhereInput!]
-  upsert: [BottleTransactionUpsertWithWhereUniqueWithoutBottleInput!]
-}
-
-input BottleTransactionUpdateManyWithWhereNestedInput {
-  where: BottleTransactionScalarWhereInput!
-  data: BottleTransactionUpdateManyDataInput!
-}
-
-input BottleTransactionUpdateWithoutBottleDataInput {
-  in: Int
-  out: Int
-}
-
-input BottleTransactionUpdateWithWhereUniqueWithoutBottleInput {
-  where: BottleTransactionWhereUniqueInput!
-  data: BottleTransactionUpdateWithoutBottleDataInput!
-}
-
-input BottleTransactionUpsertWithWhereUniqueWithoutBottleInput {
-  where: BottleTransactionWhereUniqueInput!
-  update: BottleTransactionUpdateWithoutBottleDataInput!
-  create: BottleTransactionCreateWithoutBottleInput!
-}
-
 
 type Item {
   id: ID!

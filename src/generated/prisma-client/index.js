@@ -37,14 +37,6 @@ var models = [
     embedded: false
   },
   {
-    name: "Bottle",
-    embedded: false
-  },
-  {
-    name: "BottleTransaction",
-    embedded: false
-  },
-  {
     name: "Item",
     embedded: false
   },

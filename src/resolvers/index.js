@@ -9,7 +9,6 @@ const { User } = require('./User');
 const { Discount } = require('./Discount');
 const { Transaction } = require('./Transaction');
 const { Item } = require('./Item');
-const { Bottle } = require('./Bottle');
 
 module.exports = {
   Query,
@@ -23,6 +22,5 @@ module.exports = {
   User,
   Discount,
   Transaction,
-  Item,
-  Bottle
+  Item
 };
