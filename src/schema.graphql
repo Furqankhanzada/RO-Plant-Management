@@ -890,6 +890,7 @@ type Mutation {
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteCustomer(where: UserWhereUniqueInput!): User
   createProduct(data: ProductCreateInput!): User!
+  deleteProduct(where: ProductWhereUniqueInput!): Product
 }
 
 input DiscountUpdateManyWithoutUserInput {
