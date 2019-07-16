@@ -36,6 +36,9 @@ const Query = {
         ...args.where
       }
     })
+  },
+  product(parent, args, { prisma }) {
+    return prisma.product({id: args.where.id})
   }
 };
 

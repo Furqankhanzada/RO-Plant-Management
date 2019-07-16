@@ -7,6 +7,16 @@ const product = {
     return await context.prisma.deleteProduct({ ...args.where });
   },
 
+  async updateProduct(parent, args, context) {
+    const result = await context.prisma.updateProduct({
+      data: args.data,
+      where: {
+        id: args.id
+      }
+    });
+    return result;
+    },
+
 };
 
 module.exports = { product };

@@ -774,6 +774,7 @@ type Query {
   me: User
   customers(where: UserWhereInput, first: Int): [User]
   products(where: ProductWhereInput): [Product]
+  product(where: ProductWhereUniqueInput): Product
   customer(where: UserWhereUniqueInput): User
   transactions(where: TransactionWhereInput, orderBy: LinkOrderByInput): [Transaction]
   transaction(where: TransactionWhereUniqueInput!): Transaction
@@ -870,6 +871,11 @@ input ProductCreateOneInput {
   connect: ProductWhereUniqueInput
 }
 
+input ProductUpdateInput {
+  name: String
+  price: Int
+}
+
 input UserCreateInput {
   name: String
   mobile: String!
@@ -891,7 +897,8 @@ type Mutation {
   deleteCustomer(where: UserWhereUniqueInput!): User
   createProduct(data: ProductCreateInput!): User!
   deleteProduct(where: ProductWhereUniqueInput!): Product
-}
+  updateProduct(data: ProductUpdateInput!, id: ID): Product!
+ }
 
 input DiscountUpdateManyWithoutUserInput {
   create: [DiscountCreateWithoutUserInput!]
