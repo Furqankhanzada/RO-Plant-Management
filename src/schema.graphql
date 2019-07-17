@@ -773,9 +773,9 @@ input DiscountScalarWhereInput {
 type Query {
   me: User
   customers(where: UserWhereInput, first: Int): [User]
+  customer(where: UserWhereUniqueInput): User
   products(where: ProductWhereInput): [Product]
   product(where: ProductWhereUniqueInput): Product
-  customer(where: UserWhereUniqueInput): User
   transactions(where: TransactionWhereInput, orderBy: LinkOrderByInput): [Transaction]
   transaction(where: TransactionWhereUniqueInput!): Transaction
 }

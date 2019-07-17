@@ -8,15 +8,13 @@ const product = {
   },
 
   async updateProduct(parent, args, context) {
-    const result = await context.prisma.updateProduct({
+    return await context.prisma.updateProduct({
       data: args.data,
       where: {
         id: args.id
       }
     });
-    return result;
-    },
-
+  }
 };
 
 module.exports = { product };
