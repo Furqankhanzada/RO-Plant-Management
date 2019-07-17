@@ -25,7 +25,9 @@ const permissions = shield({
         createCustomer: and(rules.isAuthenticated, rules.isAdmin),
         updateCustomer: and(rules.isAuthenticated, rules.isAdmin),
         deleteCustomer: and(rules.isAuthenticated, rules.isAdmin),
-        createProduct: and(rules.isAuthenticated, rules.isAdmin)
+        deleteProduct: and(rules.isAuthenticated, rules.isAdmin),
+        createProduct: and(rules.isAuthenticated, rules.isAdmin),
+        updateProduct: and(rules.isAuthenticated, rules.isAdmin)
     },
 });
 
