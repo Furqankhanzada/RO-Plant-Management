@@ -895,7 +895,7 @@ type Mutation {
   createTransaction(data: TransactionCreateInput!, bottleBalance: Int): Transaction!
   deleteTransaction(where: TransactionWhereUniqueInput!): Transaction
   deleteCustomer(where: UserWhereUniqueInput!): User
-  createProduct(data: ProductCreateInput!): User!
+  createProduct(data: ProductCreateInput!): Product!
   deleteProduct(where: ProductWhereUniqueInput!): Product
   updateProduct(data: ProductUpdateInput!, id: ID): Product!
  }
