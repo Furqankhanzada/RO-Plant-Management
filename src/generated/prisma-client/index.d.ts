@@ -385,6 +385,8 @@ export type TransactionOrderByInput =
   | "type_DESC"
   | "status_ASC"
   | "status_DESC"
+  | "transactionAt_ASC"
+  | "transactionAt_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -874,6 +876,7 @@ export interface AddressUpdateManyMutationInput {
 export interface TransactionUpdateManyMutationInput {
   type?: Maybe<TransactionType>;
   status?: Maybe<TransactionStatus>;
+  transactionAt?: Maybe<DateTimeInput>;
 }
 
 export interface ItemUpdateInput {
@@ -1061,6 +1064,7 @@ export interface TransactionCreateWithoutUserInput {
   status?: Maybe<TransactionStatus>;
   items?: Maybe<ItemCreateManyInput>;
   payment: PaymentCreateOneInput;
+  transactionAt: DateTimeInput;
 }
 
 export interface UserCreateOneWithoutTransactionsInput {
@@ -1160,6 +1164,14 @@ export interface TransactionWhereInput {
   items_none?: Maybe<ItemWhereInput>;
   payment?: Maybe<PaymentWhereInput>;
   user?: Maybe<UserWhereInput>;
+  transactionAt?: Maybe<DateTimeInput>;
+  transactionAt_not?: Maybe<DateTimeInput>;
+  transactionAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  transactionAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  transactionAt_lt?: Maybe<DateTimeInput>;
+  transactionAt_lte?: Maybe<DateTimeInput>;
+  transactionAt_gt?: Maybe<DateTimeInput>;
+  transactionAt_gte?: Maybe<DateTimeInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1249,6 +1261,7 @@ export interface PaymentWhereInput {
 export interface TransactionUpdateManyDataInput {
   type?: Maybe<TransactionType>;
   status?: Maybe<TransactionStatus>;
+  transactionAt?: Maybe<DateTimeInput>;
 }
 
 export interface AddressSubscriptionWhereInput {
@@ -1352,6 +1365,7 @@ export interface TransactionUpdateInput {
   items?: Maybe<ItemUpdateManyInput>;
   payment?: Maybe<PaymentUpdateOneRequiredInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutTransactionsInput>;
+  transactionAt?: Maybe<DateTimeInput>;
 }
 
 export interface TransactionUpdateManyWithoutUserInput {
@@ -1408,6 +1422,7 @@ export interface TransactionUpdateWithoutUserDataInput {
   status?: Maybe<TransactionStatus>;
   items?: Maybe<ItemUpdateManyInput>;
   payment?: Maybe<PaymentUpdateOneRequiredInput>;
+  transactionAt?: Maybe<DateTimeInput>;
 }
 
 export interface PaymentUpdateInput {
@@ -1705,6 +1720,14 @@ export interface TransactionScalarWhereInput {
   status_not?: Maybe<TransactionStatus>;
   status_in?: Maybe<TransactionStatus[] | TransactionStatus>;
   status_not_in?: Maybe<TransactionStatus[] | TransactionStatus>;
+  transactionAt?: Maybe<DateTimeInput>;
+  transactionAt_not?: Maybe<DateTimeInput>;
+  transactionAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  transactionAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  transactionAt_lt?: Maybe<DateTimeInput>;
+  transactionAt_lte?: Maybe<DateTimeInput>;
+  transactionAt_gt?: Maybe<DateTimeInput>;
+  transactionAt_gte?: Maybe<DateTimeInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1809,6 +1832,7 @@ export interface TransactionCreateInput {
   items?: Maybe<ItemCreateManyInput>;
   payment: PaymentCreateOneInput;
   user: UserCreateOneWithoutTransactionsInput;
+  transactionAt: DateTimeInput;
 }
 
 export interface NodeNode {
@@ -2050,6 +2074,7 @@ export interface TransactionPreviousValues {
   id: ID_Output;
   type: TransactionType;
   status: TransactionStatus;
+  transactionAt: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -2060,6 +2085,7 @@ export interface TransactionPreviousValuesPromise
   id: () => Promise<ID_Output>;
   type: () => Promise<TransactionType>;
   status: () => Promise<TransactionStatus>;
+  transactionAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2070,6 +2096,7 @@ export interface TransactionPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   type: () => Promise<AsyncIterator<TransactionType>>;
   status: () => Promise<AsyncIterator<TransactionStatus>>;
+  transactionAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2136,6 +2163,7 @@ export interface Transaction {
   id: ID_Output;
   type: TransactionType;
   status: TransactionStatus;
+  transactionAt: DateTimeOutput;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -2155,6 +2183,7 @@ export interface TransactionPromise extends Promise<Transaction>, Fragmentable {
   }) => T;
   payment: <T = PaymentPromise>() => T;
   user: <T = UserPromise>() => T;
+  transactionAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2176,6 +2205,7 @@ export interface TransactionSubscription
   }) => T;
   payment: <T = PaymentSubscription>() => T;
   user: <T = UserSubscription>() => T;
+  transactionAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2197,6 +2227,7 @@ export interface TransactionNullablePromise
   }) => T;
   payment: <T = PaymentPromise>() => T;
   user: <T = UserPromise>() => T;
+  transactionAt: () => Promise<DateTimeOutput>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }

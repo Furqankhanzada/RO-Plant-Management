@@ -63,6 +63,7 @@ type Transaction {
   items: [Item!]! @relation(name: "ItemsByTransactions" onDelete: CASCADE)
   payment: Payment! @relation(name: "PaymentByTransactions" onDelete: CASCADE)
   user: User! @relation(name: "TransactionsByUser")
+  transactionAt: DateTime!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

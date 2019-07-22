@@ -1309,6 +1309,7 @@ type Transaction {
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
   payment: Payment!
   user: User!
+  transactionAt: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1326,6 +1327,7 @@ input TransactionCreateInput {
   items: ItemCreateManyInput
   payment: PaymentCreateOneInput!
   user: UserCreateOneWithoutTransactionsInput!
+  transactionAt: DateTime!
 }
 
 input TransactionCreateManyWithoutUserInput {
@@ -1339,6 +1341,7 @@ input TransactionCreateWithoutUserInput {
   status: TransactionStatus
   items: ItemCreateManyInput
   payment: PaymentCreateOneInput!
+  transactionAt: DateTime!
 }
 
 type TransactionEdge {
@@ -1353,6 +1356,8 @@ enum TransactionOrderByInput {
   type_DESC
   status_ASC
   status_DESC
+  transactionAt_ASC
+  transactionAt_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1363,6 +1368,7 @@ type TransactionPreviousValues {
   id: ID!
   type: TransactionType!
   status: TransactionStatus!
+  transactionAt: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1390,6 +1396,14 @@ input TransactionScalarWhereInput {
   status_not: TransactionStatus
   status_in: [TransactionStatus!]
   status_not_in: [TransactionStatus!]
+  transactionAt: DateTime
+  transactionAt_not: DateTime
+  transactionAt_in: [DateTime!]
+  transactionAt_not_in: [DateTime!]
+  transactionAt_lt: DateTime
+  transactionAt_lte: DateTime
+  transactionAt_gt: DateTime
+  transactionAt_gte: DateTime
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1446,16 +1460,19 @@ input TransactionUpdateInput {
   items: ItemUpdateManyInput
   payment: PaymentUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutTransactionsInput
+  transactionAt: DateTime
 }
 
 input TransactionUpdateManyDataInput {
   type: TransactionType
   status: TransactionStatus
+  transactionAt: DateTime
 }
 
 input TransactionUpdateManyMutationInput {
   type: TransactionType
   status: TransactionStatus
+  transactionAt: DateTime
 }
 
 input TransactionUpdateManyWithoutUserInput {
@@ -1480,6 +1497,7 @@ input TransactionUpdateWithoutUserDataInput {
   status: TransactionStatus
   items: ItemUpdateManyInput
   payment: PaymentUpdateOneRequiredInput
+  transactionAt: DateTime
 }
 
 input TransactionUpdateWithWhereUniqueWithoutUserInput {
@@ -1521,6 +1539,14 @@ input TransactionWhereInput {
   items_none: ItemWhereInput
   payment: PaymentWhereInput
   user: UserWhereInput
+  transactionAt: DateTime
+  transactionAt_not: DateTime
+  transactionAt_in: [DateTime!]
+  transactionAt_not_in: [DateTime!]
+  transactionAt_lt: DateTime
+  transactionAt_lte: DateTime
+  transactionAt_gt: DateTime
+  transactionAt_gte: DateTime
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
