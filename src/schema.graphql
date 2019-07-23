@@ -1159,6 +1159,7 @@ type Transaction {
   items: [Item!]!
   payment: Payment!
   user: User
+  transactionAt: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1167,6 +1168,7 @@ input TransactionCreateInput {
   id: ID
   type: TransactionType
   status: TransactionStatus
+  transactionAt: DateTime!
   items: ItemCreateManyInput
   payment: PaymentCreateOneInput!
   user: UserCreateOneWithoutTransactionsInput!
@@ -1189,6 +1191,7 @@ input TransactionUpdateInput {
   type: TransactionType
   status: TransactionStatus
   items: ItemUpdateManyInput
+  transactionAt: DateTime!
   payment: PaymentUpdateOneRequiredInput
   user: UserUpdateOneRequiredWithoutTransactionsInput
 }
